@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 16:36:59 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 17:39:30 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/24 19:35:07 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	int		burningship2(t_env *e)
 		tmp = e->fra.zr * e->fra.zr + e->fra.zi * e->fra.zi;
 		if (tmp >= 4)
 		{
-			e->deg = log(log(tmp)) / log(2);
+			e->deg = log(log((tmp))) / log(2);
 			return (i);
 		}
 	}
@@ -54,7 +54,7 @@ void			burningship(t_env *e)
 			if (i >= e->fra.i_max)
 				set_pxl(e, x, y, color_bc());
 			else
-				set_pxl(e, x, y, interpol_color2(color_bl(), color_r(),
+				set_pxl(e, x, y, interpol_color2(color_bl(), color_y(),
 							color_b(), (((double)i + (1 - e->deg))
 								/ ((double)e->fra.i_max))));
 		}

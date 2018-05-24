@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 17:39:32 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:49:43 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,13 @@ t_color				color_g(void);
 t_color				color_b(void);
 t_color				color_bl(void);
 t_color				color_bc(void);
+t_color				color_y(void);
 t_color				interpol_color(t_color a, t_color b, double i);
 t_color				interpol_color2(t_color a, t_color b, t_color c, double i);
 int					out_map(long double x, long double y);
 void				init_env(t_env *e);
 void				init_env2(t_env *e);
+void				init_env3(t_env *e);
 void				clean(t_env *e);
 void				mandelbrot(t_env *e);
 void				mandelbrot3(t_env *e);

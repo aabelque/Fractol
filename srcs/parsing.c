@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:28:34 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 17:39:31 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:37:29 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			parsing_arg2(char *str, t_env *e)
 	if (ft_strequ(str, "Burningship"))
 	{
 		e->fractol = 4;
-		init_env(e);
+		init_env3(e);
 		return (1);
 	}
 	else
