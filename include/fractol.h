@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/23 19:08:44 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/24 17:39:32 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ typedef enum		e_key
 	K_LEFT = 123,
 	K_RIGHT,
 	K_DOWN,
-	K_UP
+	K_UP,
+	K_P = 35,
+	K_O = 31
 }					t_key;
 
 typedef struct		s_color
@@ -82,6 +84,7 @@ typedef struct		s_env
 	void			*mlx;
 	void			*win;
 	int				fractol;
+	long double		n;
 	unsigned int	colorm;
 	int				colorv;
 	long double		deg;
@@ -92,6 +95,7 @@ typedef struct		s_env
 	t_color			c;
 }					t_env;
 
+void				burningship(t_env *e);
 void				move_up(t_env *e);
 void				move_do(t_env *e);
 void				move_r(t_env *e);
@@ -115,6 +119,7 @@ void				init_env(t_env *e);
 void				init_env2(t_env *e);
 void				clean(t_env *e);
 void				mandelbrot(t_env *e);
+void				mandelbrot3(t_env *e);
 void				julia(t_env *e);
 void				ft_error(char *str);
 void				ft_malloc_error(t_env *e);
@@ -122,5 +127,6 @@ void				ft_usage(void);
 int					init_mlx(t_env *e);
 int					loop_hook(t_env *e);
 int					parsing_arg(char *str, t_env *e);
+int					parsing_arg2(char *str, t_env *e);
 int					main(int ac, char **av);
 #endif

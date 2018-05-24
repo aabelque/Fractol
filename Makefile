@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/05/23 17:51:14 by aabelque         ###   ########.fr        #
+#    Updated: 2018/05/24 16:39:58 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,13 @@ SRC = srcs/main.c \
 	  srcs/init_mlx.c \
 	  srcs/parsing.c \
 	  srcs/mandelbrot.c \
+	  srcs/mandelbrot2.c \
 	  srcs/clean.c \
 	  srcs/init_env.c \
 	  srcs/map_control.c \
 	  srcs/draw.c \
 	  srcs/julia.c \
+	  srcs/burningship.c \
 	  srcs/colors.c \
 	  srcs/key_hook.c \
 	  srcs/mouse_hook.c \

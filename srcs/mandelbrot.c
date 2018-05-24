@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 15:30:59 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/23 18:44:50 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:59:00 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	int		mandelbrot2(t_env *e)
 		tmp = e->fra.zr * e->fra.zr + e->fra.zi * e->fra.zi;
 		if (tmp >= 4)
 		{
-			e->deg = log(log(sqrt(tmp))) / log(2);
+			e->deg = log(log(tmp)) / log(2);
 			return (i);
 		}
 	}
@@ -40,10 +40,10 @@ void			mandelbrot(t_env *e)
 	intmax_t	y;
 	int			i;
 
-	x = 0;
+	x = -1;
 	while (++x < X_WIN)
 	{
-		y = 0;
+		y = -1;
 		while (++y < Y_WIN)
 		{
 			e->fra.zr = 0;
@@ -52,10 +52,10 @@ void			mandelbrot(t_env *e)
 			e->fra.ci = (long double)y / e->fra.zoom + e->fra.y1;
 			i = mandelbrot2(e);
 			if (i >= e->fra.i_max)
-				set_pxl(e, x, y, colorBC());
+				set_pxl(e, x, y, color_bc());
 			else
-				set_pxl(e, x, y, interpol_color2(colorBL(), colorR(),
-							colorB(), (((double)i + (1 - e->deg))
+				set_pxl(e, x, y, interpol_color2(color_bl(), color_r(),
+							color_b(), (((double)i + (1 - e->deg))
 								/ ((double)e->fra.i_max))));
 		}
 	}

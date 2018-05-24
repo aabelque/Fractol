@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/23 17:46:11 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:40:38 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int		loop_hook(t_env *e)
 		mandelbrot(e);
 	else if (e->fractol == 2)
 		julia(e);
+	if (e->fractol == 3)
+		mandelbrot3(e);
+	if (e->fractol == 4)
+		burningship(e);
 	if (mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0) == -1)
 		ft_error("fail to put image");
 	return (0);
@@ -38,7 +42,7 @@ int		init_mlx(t_env *e)
 	e->img.addr = mlx_get_data_addr(e->img.img, &(e->img.bpp),
 			&(e->img.s_line), &(e->img.endian));
 	mlx_loop_hook(e->mlx, loop_hook, e);
-	mlx_key_hook(e->win, key_hook, e);
 	mlx_mouse_hook(e->win, mouse_hook, e);
+	mlx_hook(e->win, 2, 3, key_hook, e);
 	return (0);
 }

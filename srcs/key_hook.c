@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/23 19:03:34 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:35:05 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ int				key_hook(int keycode, t_env *e)
 		move_r(e);
 	if (keycode == K_LEFT)
 		move_l(e);
+	if (keycode == K_P)
+		e->n += 0.2;
+	if (keycode == K_O)
+		e->n -= 0.2;
 	expose_hook(e);
 	return (0);
 }

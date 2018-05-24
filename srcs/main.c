@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:18:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/23 11:38:43 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:54:27 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 int			main(int ac, char **av)
 {
 	t_env	*e;
-	int		ret;
 
 	e = NULL;
 	if (ac != 2)
 		ft_error("Usage: ./fractol <Fractal's name>");
 	if (!(e = ft_memalloc(sizeof(t_env))))
 		ft_malloc_error(e);
-	if ((ret = parsing_arg(av[1], e)) == -1)
+	if (parsing_arg(av[1], e) == -1 && parsing_arg2(av[1], e) == -1)
 	{
 		clean(e);
 		ft_usage();

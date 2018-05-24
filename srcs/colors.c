@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 10:11:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/23 18:59:33 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:36:23 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ unsigned int		set_color(int a, t_env *e)
 	return (c);
 }
 
-t_color			colorR(void)
+t_color			color_r(void)
 {
 	t_color		red;
 
@@ -46,7 +46,7 @@ t_color			colorR(void)
 	return (red);
 }
 
-t_color			colorG(void)
+t_color			color_g(void)
 {
 	t_color		green;
 
@@ -57,7 +57,7 @@ t_color			colorG(void)
 	return (green);
 }
 
-t_color			colorBL(void)
+t_color			color_bl(void)
 {
 	t_color		black;
 	black.r = 200;
@@ -67,7 +67,7 @@ t_color			colorBL(void)
 	return (black);
 }
 
-t_color			colorB(void)
+t_color			color_b(void)
 {
 	t_color		blue;
 	blue.r = 0;
@@ -77,7 +77,7 @@ t_color			colorB(void)
 	return (blue);
 }
 
-t_color			colorBC(void)
+t_color			color_bc(void)
 {
 	t_color		blue;
 	blue.r = 0;
@@ -106,10 +106,10 @@ t_color			interpol_color2(t_color a, t_color b, t_color c, double i)
 	//i /= 2;
 	if (i < 0.5)
 	{
-		new_color.r = a.r + (b.r - a.r) * i;
-		new_color.g = a.g + (b.g - a.g) * i;
-		new_color.b = a.b + (b.b - a.b) * i;
-		new_color.a = a.a + (b.a - a.a) * i;
+		new_color.r = a.r + (b.r - a.r) * i * 2;
+		new_color.g = a.g + (b.g - a.g) * i * 2;
+		new_color.b = a.b + (b.b - a.b) * i * 2;
+		new_color.a = a.a + (b.a - a.a) * i * 2;
 	}
 	/*else if (i < 0.6)
 	{
@@ -127,10 +127,10 @@ t_color			interpol_color2(t_color a, t_color b, t_color c, double i)
 	}*/
 	else
 	{
-		new_color.r = b.r + (c.r - b.r) * i;
-		new_color.g = b.g + (c.g - b.g) * i;
-		new_color.b = b.b + (c.b - b.b) * i;
-		new_color.a = b.a + (c.a - b.a) * i;
+		new_color.r = b.r + (c.r - b.r) * (i - 0.5) * 2;
+		new_color.g = b.g + (c.g - b.g) * (i - 0.5) * 2;
+		new_color.b = b.b + (c.b - b.b) * (i - 0.5) * 2;
+		new_color.a = b.a + (c.a - b.a) * (i - 0.5) * 2;
 	}
 	return (new_color);
 }
