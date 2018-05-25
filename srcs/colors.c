@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 10:11:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 19:10:26 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/25 06:04:23 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_color			interpol_color(t_color a, t_color b, double i)
 	new_color.g = a.g + (b.g - a.g) * i;
 	new_color.b = a.b + (b.b - a.b) * i;
 	new_color.a = a.a + (b.a - a.a) * i;
-
 	return (new_color);
 }
 
@@ -39,7 +38,7 @@ t_color			interpol_color2(t_color a, t_color b, t_color c, double i)
 {
 	t_color		new_color;
 
-	if (i < 0.5)
+	if (i <= 0.5)
 	{
 		new_color.r = a.r + (b.r - a.r) * i * 2;
 		new_color.g = a.g + (b.g - a.g) * i * 2;

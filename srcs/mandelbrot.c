@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 15:30:59 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 15:59:00 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/25 02:07:24 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void			mandelbrot(t_env *e)
 			if (i >= e->fra.i_max)
 				set_pxl(e, x, y, color_bc());
 			else
-				set_pxl(e, x, y, interpol_color2(color_bl(), color_r(),
-							color_b(), (((double)i + (1 - e->deg))
+				set_pxl(e, x, y, interpol_color2(color_b(), color_bl(),
+							color_r(), (((double)i + (1 - e->deg))
 								/ ((double)e->fra.i_max))));
 		}
 	}

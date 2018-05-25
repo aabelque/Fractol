@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 18:49:43 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/25 05:43:00 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ typedef enum		e_key
 	K_DOWN,
 	K_UP,
 	K_P = 35,
-	K_O = 31
+	K_O = 31,
+	K_I = 34,
+	K_U = 32
 }					t_key;
 
 typedef struct		s_color

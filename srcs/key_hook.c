@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 16:35:05 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/25 05:44:03 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ static void		zoom_dok(t_env *e)
 	e->fra.zoom = e->x_win / (e->fra.x2 - e->fra.x1);
 }
 
+static	int		key_hook2(int keycode, t_env *e)
+{
+	if (keycode == K_I)
+		e->fra.i_max += 2;
+	if (keycode == K_U)
+		e->fra.i_max -= 2;
+	return (0);
+}
+
 int				key_hook(int keycode, t_env *e)
 {
 	if (keycode == K_ESC)
@@ -61,6 +70,8 @@ int				key_hook(int keycode, t_env *e)
 		e->n += 0.2;
 	if (keycode == K_O)
 		e->n -= 0.2;
+	printf("%d\n", keycode);
+	key_hook2(keycode, e);
 	expose_hook(e);
 	return (0);
 }

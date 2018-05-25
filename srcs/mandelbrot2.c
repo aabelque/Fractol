@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:29:30 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 16:40:42 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/05/25 06:02:34 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ static	int		mandelbrot2(t_env *e)
 	while (++i < e->fra.i_max)
 	{
 		e->fra.tmp = e->fra.zr;
-		e->fra.zr = pow((e->fra.zr * e->fra.zr) + (e->fra.zi * e->fra.zi), e->n/2)
+		e->fra.zr = pow((e->fra.zr * e->fra.zr) +
+				(e->fra.zi * e->fra.zi), e->n / 2)
 			* cos(e->n * atan2(e->fra.zi, e->fra.zr)) + e->fra.cr;
-		e->fra.zi = pow((e->fra.tmp * e->fra.tmp) + (e->fra.zi * e->fra.zi), e->n/2)
+		e->fra.zi = pow((e->fra.tmp * e->fra.tmp) +
+				(e->fra.zi * e->fra.zi), e->n / 2)
 			* sin(e->n * atan2(e->fra.zi, e->fra.tmp)) + e->fra.ci;
 		tmp = e->fra.zr * e->fra.zr + e->fra.zi * e->fra.zi;
 		if (tmp >= 4)
