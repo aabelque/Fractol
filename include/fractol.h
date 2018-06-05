@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/25 05:43:00 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/05 13:22:28 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@
 # define X_WIN 1600
 # define Y_WIN 900
 
-# define I_MAX 50
-# define SCALE 200
-
 # define IMG_X 270
 # define IMG_Y 240
 
 typedef enum		e_mouse
 {
 	M_SCUP = 4,
-	M_SCDO = 5
+	M_SCDO = 5,
+	M_LC = 1,
+	M_RC
 }					t_mouse;
 
 typedef enum		e_key
@@ -90,6 +89,8 @@ typedef struct		s_env
 	unsigned int	colorm;
 	int				colorv;
 	long double		deg;
+	long double		julcr;
+	long double		julci;
 	long double		x_win;
 	long double		y_win;
 	t_img			img;
@@ -97,6 +98,7 @@ typedef struct		s_env
 	t_color			c;
 }					t_env;
 
+void				julia_move(t_env *e, int x, int y);
 void				burningship(t_env *e);
 void				move_up(t_env *e);
 void				move_do(t_env *e);
@@ -119,7 +121,7 @@ t_color				interpol_color(t_color a, t_color b, double i);
 t_color				interpol_color2(t_color a, t_color b, t_color c, double i);
 int					out_map(long double x, long double y);
 void				init_env(t_env *e);
-void				init_env2(t_env *e);
+void				init_env2(t_env *e, long double x, long double y);
 void				init_env3(t_env *e);
 void				clean(t_env *e);
 void				mandelbrot(t_env *e);

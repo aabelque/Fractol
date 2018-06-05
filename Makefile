@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/05/24 18:49:27 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/05 13:50:33 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ all: $(NAME)
 
 $(NAME): $(LFTPATH)$(LIBFT) $(LMLXPATH)$(LIBMLX) $(OBJS) $(INC) 
 	@$(CC) $(CFLAG) -O3 -o $(NAME) $(ALLINCS) -L$(LFTPATH) -l$(FTLK) -L$(LMLXPATH) -l$(MLXLK) $(FRAMEWORKS) $(OBJS)
-	-@echo "\033[32m[ ✔ ] Fractol ready.\033[0m"
+	@echo "\033[3;32m[ ✔ ] Fractol ready.\033[0m"
 
 %.o: %.c $(INC)
 	@$(CC) $(CFLAG) -o $@ $(ALLINCS) -c $<

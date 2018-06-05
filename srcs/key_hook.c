@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/25 05:44:03 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/05 12:03:52 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int				key_hook(int keycode, t_env *e)
 		e->n += 0.2;
 	if (keycode == K_O)
 		e->n -= 0.2;
-	printf("%d\n", keycode);
 	key_hook2(keycode, e);
 	expose_hook(e);
 	return (0);

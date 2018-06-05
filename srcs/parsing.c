@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:28:34 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 18:37:29 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/05 13:28:32 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int			parsing_arg(char *str, t_env *e)
 	}
 	else if (ft_strequ(str, "Julia"))
 	{
-		init_env2(e);
 		e->fractol = 2;
+		init_env2(e, 0.285, 0.01);
 		return (1);
 	}
-	else if (ft_strequ(str, "Mandelbrot3"))
+	else if (ft_strequ(str, "Mandelbrot2"))
 	{
-		init_env(e);
 		e->fractol = 3;
+		init_env(e);
 		return (1);
 	}
 	else

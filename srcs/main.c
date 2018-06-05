@@ -6,15 +6,36 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:18:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/24 16:54:27 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/05 11:47:50 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int			main(int ac, char **av)
+static	void	display_ctrl(void)
 {
-	t_env	*e;
+	ft_putstr("\
+__________________________\n\
+CONTROLS:\n\
+Quit:\n\
+	KEY: ESC\n\
+\n\
+Move:\n\
+	Left: Left Arrow\n\
+	Right: Right Arrow\n\
+	Up: Up Arrow\n\
+	Down: Down Arrow\n\
+\n\
+Scale:\n\
+	Widen: +\n\
+	Narrow: -\n\
+__________________________\n\
+");
+}
+
+int				main(int ac, char **av)
+{
+	t_env		*e;
 
 	e = NULL;
 	if (ac != 2)
@@ -28,6 +49,7 @@ int			main(int ac, char **av)
 		exit(0);
 	}
 	init_mlx(e);
+	display_ctrl();
 	mlx_loop(e->mlx);
 	return (0);
 }
