@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 16:02:06 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/05 13:32:21 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/07 11:40:51 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,8 @@ int				mouse_hook(int button, int x, int y, t_env *e)
 	if (button == M_SCDO || button == K_LESS)
 		zoom_dom(e, x, y);
 	if (button == M_LC)
-		julia_move(e, x, y);
-	if (button == M_RC)
+		e->mouse = 1;
+	if (button == M_RC && e->fractol == F_JULIA)
 		init_env2(e, 0.285, 0.01);
-	expose_hook(e);
 	return (0);
 }

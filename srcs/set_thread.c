@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   set_thread.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 10:30:09 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/07 14:16:57 by aabelque         ###   ########.fr       */
+/*   Created: 2018/06/06 10:51:08 by aabelque          #+#    #+#             */
+/*   Updated: 2018/06/07 09:14:38 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		redraw(t_env *e)
+void			send_thread(t_env *e)
 {
-	e->func[e->fractol]((void *)e);
-	if (mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0) == -1)
-		ft_error("fail to put image");
-}
+	int			i;
+	t_thrdata	data[NB_THR];
 
-void		set_pxl(t_img *e, int x, int y, t_color color)
-{
-	int		pxl;
-
-	pxl = (x * 4) + (y * e->s_line);
-	e->addr[pxl] = color.b;
-	e->addr[++pxl] = color.g;
-	e->addr[++pxl] = color.r;
-	e->addr[++pxl] = color.a;
+	i = 0;
+	while (i < NB_THR)
+	{
+		data[i] = (t_thrdata){i, &e->fra, &e->img};
+		if (pthread_create(&e->thread[i], NULL, e->func[e->fractol], &data[i]))
+			ft_error("thread not create");
+		i++;
+	}
+	i = 0;
+	while (i < NB_THR)
+	{
+		if (pthread_join(e->thread[i], NULL) != 0)
+			ft_error("thread not join");
+		i++;
+	}
 }

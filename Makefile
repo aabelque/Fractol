@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/05 13:50:33 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/07 16:15:13 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ NAME = fractol
 
 CC = gcc
 
-CFLAG = -Wall -Werror -Wextra -g
+CFLAG = -Wall -Wextra -g
+
+THFLAG = -lpthread
 
 MAKE = make
 
@@ -35,8 +37,11 @@ SRC = srcs/main.c \
 	  srcs/colors.c \
 	  srcs/set_color.c \
 	  srcs/key_hook.c \
+	  srcs/key_hook2.c \
 	  srcs/mouse_hook.c \
-	  srcs/move.c
+	  srcs/mouse_hook2.c \
+	  srcs/move.c \
+	  srcs/set_thread.c
 
 OBJS = $(SRC:%.c=%.o)
 	INCDIR = include/
@@ -58,7 +63,7 @@ MLXLK = mlx
 ALLINCS = -I$(LFTPATH) -I$(LMLXPATH) -I$(INCDIR)
 
 ifneq ($(NOERR),yes)
-	CFLAG -= -Werror
+	CFLAG += -Werror
 endif
 
 ifeq ($(SAN),yes)
@@ -67,8 +72,8 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(LFTPATH)$(LIBFT) $(LMLXPATH)$(LIBMLX) $(OBJS) $(INC) 
-	@$(CC) $(CFLAG) -O3 -o $(NAME) $(ALLINCS) -L$(LFTPATH) -l$(FTLK) -L$(LMLXPATH) -l$(MLXLK) $(FRAMEWORKS) $(OBJS)
+$(NAME): $(LFTPATH)$(LIBFT) $(LMLXPATH)$(LIBMLX) $(OBJS) $(INC)
+	@$(CC) $(CFLAGS) $(THFLAG) -O3 -o $(NAME) $(ALLINCS) -L$(LFTPATH) -l$(FTLK) -L$(LMLXPATH) -l$(MLXLK) $(FRAMEWORKS) $(OBJS)
 	@echo "\033[3;32m[ ✔ ] Fractol ready.\033[0m"
 
 %.o: %.c $(INC)
@@ -83,7 +88,7 @@ $(LMLXPATH)$(LIBMLX):
 clean:
 	$(MAKE) -C $(LFTPATH) clean
 	@rm -rf $(INCDIR)/*.h.gch
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) $(COBJS)
 
 fclean: clean
 	$(MAKE) -C $(LFTPATH) fclean

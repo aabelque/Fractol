@@ -6,59 +6,67 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 06:02:48 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/05 13:54:58 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/07 09:56:45 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static	int		julia2(t_env *e)
+static	int		julia2(t_thrdata *e, intmax_t x, intmax_t y,
+		long double *deg)
 {
 	int			i;
 	long double	tmp;
+	long double	ztmp;
+	t_cmplx		z;
+	t_cmplx		c;
 
 	i = -1;
-	while (++i < e->fra.i_max)
+	z.r = (long double)x / e->fra->zoom + e->fra->x1;
+	z.i = (long double)y / e->fra->zoom + e->fra->y1;
+	c.r = e->fra->julcr;
+	c.i = e->fra->julci;
+	while (++i < e->fra->i_max)
 	{
-		e->fra.tmp = e->fra.zr;
-		e->fra.zr = e->fra.zr * e->fra.zr - e->fra.zi * e->fra.zi
-			+ e->fra.cr;
-		e->fra.zi = 2 * e->fra.zi * e->fra.tmp + e->fra.ci;
-		tmp = e->fra.zr * e->fra.zr + e->fra.zi * e->fra.zi;
+		ztmp = z.r;
+		z.r = z.r * z.r - z.i * z.i + c.r;
+		z.i = 2 * z.i * ztmp + c.i;
+		tmp = z.r * z.r + z.i * z.i;
 		if (tmp >= 4)
 		{
-			e->deg = log10l(log10l(tmp)) / log10l(2);
+			*deg = log10l(log10l(tmp)) / log10l(2);
 			return (i);
 		}
 	}
 	return (i);
 }
 
-void			julia(t_env *e)
+void			*julia(void *arg)
 {
 	intmax_t	x;
 	intmax_t	y;
 	int			i;
+	long double deg;
+	t_thrdata	*e;
 
-	x = -1;
-	while (++x < X_WIN)
+	e = (t_thrdata *)arg;
+	x = e->i_thr;
+	while (x < X_WIN)
 	{
 		y = -1;
 		while (++y < Y_WIN)
 		{
-			e->fra.zr = (long double)x / e->fra.zoom + e->fra.x1;
-			e->fra.zi = (long double)y / e->fra.zoom + e->fra.y1;
-			e->fra.cr = e->julcr;
-			e->fra.ci = e->julci;
-			i = julia2(e);
-			if (i >= e->fra.i_max)
-				set_pxl(e, x, y, color_bc());
+			i = julia2(e, x, y, &deg);
+			if (i >= e->fra->i_max)
+				set_pxl(e->img, x, y, color_bc());
 			else
-				set_pxl(e, x, y, interpol_color(color_bl(), color_b(),
-							(((double)i + (1 - e->deg))
-						/ ((double)e->fra.i_max))));
+				set_pxl(e->img, x, y, interpol_color(color_bl(), color_b(),
+							(((double)i + (1 - deg))
+						/ ((double)e->fra->i_max))));
 		}
+		x += NB_THR;
 	}
+	return (NULL);
 }
 
 void			julia_move(t_env *e, int x, int y)
@@ -68,6 +76,6 @@ void			julia_move(t_env *e, int x, int y)
 
 	jx = ((long double)x - e->x_win / 2) / 1500;
 	jy = ((long double)y - e->y_win / 2) / 1500;
-	e->julcr = jx;
-	e->julci = jy;
+	e->fra.julcr = jx;
+	e->fra.julci = jy;
 }

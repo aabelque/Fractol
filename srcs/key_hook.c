@@ -6,13 +6,13 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/05 12:03:52 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/07 14:03:25 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void		zoom_upk(t_env *e)
+void			zoom_upk(t_env *e)
 {
 	long double sh;
 
@@ -25,7 +25,7 @@ static void		zoom_upk(t_env *e)
 	e->fra.zoom = e->x_win / (e->fra.x2 - e->fra.x1);
 }
 
-static void		zoom_dok(t_env *e)
+void			zoom_dok(t_env *e)
 {
 	long double sh;
 
@@ -55,22 +55,21 @@ int				key_hook(int keycode, t_env *e)
 		exit(EXIT_FAILURE);
 	}
 	if (keycode == K_PLUS)
-		zoom_upk(e);
+		e->keybd = 1;
 	if (keycode == K_LESS)
-		zoom_dok(e);
+		e->keybd = 2;
 	if (keycode == K_UP)
-		move_up(e);
+		e->keybd = 3;
 	if (keycode == K_DOWN)
-		move_do(e);
+		e->keybd = 4;
 	if (keycode == K_RIGHT)
-		move_r(e);
+		e->keybd = 5;
 	if (keycode == K_LEFT)
-		move_l(e);
+		e->keybd = 6;
 	if (keycode == K_P)
-		e->n += 0.2;
+		e->fra.n += 0.2;
 	if (keycode == K_O)
-		e->n -= 0.2;
+		e->fra.n -= 0.2;
 	key_hook2(keycode, e);
-	expose_hook(e);
 	return (0);
 }
