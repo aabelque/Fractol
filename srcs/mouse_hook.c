@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 16:02:06 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/07 11:40:51 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/08 18:20:34 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,19 @@ static void		zoom_dom(t_env *e, int x, int y)
 	e->fra.zoom = e->x_win / (e->fra.x2 - e->fra.x1);
 }
 
+int				mouse_motion_hook(int x, int y, t_env *e)
+{
+	if (e->mouse == 1)
+		julia_move(e, x, y);
+	return (0);
+}
+
 int				mouse_hook(int button, int x, int y, t_env *e)
 {
 	if (button == M_SCUP || button == K_PLUS)
 		zoom_upm(e, x, y);
 	if (button == M_SCDO || button == K_LESS)
 		zoom_dom(e, x, y);
-	if (button == M_LC)
-		e->mouse = 1;
 	if (button == M_RC && e->fractol == F_JULIA)
 		init_env2(e, 0.285, 0.01);
 	return (0);

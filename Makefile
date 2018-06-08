@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/08 11:34:27 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/08 16:45:20 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,10 @@ SRC = srcs/main.c \
 	  srcs/burningship.c \
 	  srcs/colors.c \
 	  srcs/set_color.c \
+	  srcs/change_color.c \
 	  srcs/key_hook.c \
 	  srcs/key_hook2.c \
 	  srcs/mouse_hook.c \
-	  srcs/mouse_hook2.c \
 	  srcs/move.c \
 	  srcs/set_thread.c
 

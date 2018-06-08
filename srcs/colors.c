@@ -6,11 +6,20 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 10:11:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/25 06:04:23 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:01:21 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void			init_color(t_env *e)
+{
+	e->ptf.ptcol1 = color_b;
+	e->ptf.ptcol2 = color_bl;
+	e->ptf.ptcol3 = color_r;
+	e->ptf.ptcol4 = color_bc;
+	e->ptf.ptcol5 = color_y;
+}
 
 t_color			color_y(void)
 {

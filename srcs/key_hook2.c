@@ -6,11 +6,12 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 11:48:25 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/07 14:19:30 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:18:15 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
 int		key_release_hook(int keycode, t_env *e)
 {
@@ -44,12 +45,18 @@ int		key_press(t_env *e)
 	if (e->keybd == 4)
 		move_do(e);
 	if (e->keybd == 5)
+	{
 		move_r(e);
+	}
 	if (e->keybd == 6)
 		move_l(e);
 	if (e->keybd == 7)
 		e->fra.i_max += 2;
 	if (e->keybd == 8)
 		e->fra.i_max -= 2;
+	if (e->keycol == 1)
+	{
+		change_color(e);
+	}
 	return (0);
 }

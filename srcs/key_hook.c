@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/07 16:28:10 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:09:13 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,54 @@ void			zoom_dok(t_env *e)
 	e->fra.zoom = e->x_win / (e->fra.x2 - e->fra.x1);
 }
 
+static	int		key_change_fractal(int keycode, t_env *e)
+{
+	if (keycode == K_1)
+	{
+		e->fractol = F_MANDEL;
+		init_env(e);
+	}
+	if (keycode == K_2)
+	{
+		e->fractol = F_JULIA;
+		init_env2(e, 0.285, 0.01);
+	}
+	if (keycode == K_3)
+	{
+		e->fractol = F_MANDEL2;
+		init_env(e);
+	}
+	if (keycode == K_4)
+	{
+		e->fractol = F_BURNIN;
+		init_env3(e);
+	}
+	return (0);
+}
+
 static	int		key_hook2(int keycode, t_env *e)
 {
 	if (keycode == K_I)
 		e->keybd = 7;
 	if (keycode == K_U)
 		e->keybd = 8;
+	if (keycode == K_SP)
+	{
+		if (e->mouse == 1)
+			e->mouse = 0;
+		else
+			e->mouse = 1;
+	}
+	if (keycode == K_C1)
+		e->keycol = 1;
+	key_change_fractal(keycode, e);
 	return (0);
 }
 
 int				key_hook(int keycode, t_env *e)
 {
 	if (keycode == K_ESC)
-	{
-		mlx_destroy_window(e->mlx, e->win);
-		exit(EXIT_FAILURE);
-	}
+		key_quit(e);
 	if (keycode == K_PLUS)
 		e->keybd = 1;
 	if (keycode == K_LESS)

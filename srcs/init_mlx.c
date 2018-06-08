@@ -6,11 +6,19 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/07 12:29:16 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/08 16:45:54 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int		key_quit(t_env *e)
+{
+	mlx_destroy_window(e->mlx, e->win);
+	mlx_destroy_image(e->mlx, e->img.img);
+	clean(e);
+	exit(EXIT_SUCCESS);
+}
 
 void	init_funct(t_env *e)
 {
@@ -37,11 +45,11 @@ int		init_mlx(t_env *e)
 	e->img.img = mlx_new_image(e->mlx, X_WIN, Y_WIN);
 	e->img.addr = mlx_get_data_addr(e->img.img, &(e->img.bpp),
 			&(e->img.s_line), &(e->img.endian));
-	mlx_loop_hook(e->mlx, loop_hook, e);
 	mlx_hook(e->win, 4, 0, mouse_hook, e);
-	mlx_hook(e->win, 5, 0, mouse_release_hook, e);
 	mlx_hook(e->win, 6, 0, mouse_motion_hook, e);
 	mlx_hook(e->win, 2, 0, key_hook, e);
+	mlx_hook(e->win, 17, 0, key_quit, e);
 	mlx_hook(e->win, 3, 0, key_release_hook, e);
+	mlx_loop_hook(e->mlx, loop_hook, e);
 	return (0);
 }

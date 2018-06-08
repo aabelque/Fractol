@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 18:42:55 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/25 06:03:45 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/08 14:47:50 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ t_color			color_g(void)
 
 t_color			color_bl(void)
 {
-	t_color		black;
+	t_color		white;
 
-	black.r = 200;
-	black.g = 200;
-	black.b = 200;
-	black.a = 0;
-	return (black);
+	white.r = 200;
+	white.g = 200;
+	white.b = 200;
+	white.a = 0;
+	return (white);
 }
 
 t_color			color_b(void)
@@ -58,11 +58,11 @@ t_color			color_b(void)
 
 t_color			color_bc(void)
 {
-	t_color		blue;
+	t_color		black;
 
-	blue.r = 0;
-	blue.g = 0;
-	blue.b = 0;
-	blue.a = 0;
-	return (blue);
+	black.r = 0;
+	black.g = 0;
+	black.b = 0;
+	black.a = 0;
+	return (black);
 }

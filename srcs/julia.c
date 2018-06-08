@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 06:02:48 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/07 09:56:45 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/08 18:19:49 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ void			*julia(void *arg)
 		{
 			i = julia2(e, x, y, &deg);
 			if (i >= e->fra->i_max)
-				set_pxl(e->img, x, y, color_bc());
+				set_pxl(e->img, x, y, e->ptf->ptcol4());
 			else
-				set_pxl(e->img, x, y, interpol_color(color_bl(), color_b(),
+				set_pxl(e->img, x, y, interpol_color(e->ptf->ptcol2(),
+							e->ptf->ptcol1(),
 							(((double)i + (1 - deg))
 						/ ((double)e->fra->i_max))));
 		}
@@ -74,8 +75,8 @@ void			julia_move(t_env *e, int x, int y)
 	long double	jx;
 	long double	jy;
 
-	jx = ((long double)x - e->x_win / 2) / 1500;
-	jy = ((long double)y - e->y_win / 2) / 1500;
+	jx = ((long double)x - e->x_win / 2) / 1000;
+	jy = ((long double)y - e->y_win / 2) / 1000;
 	e->fra.julcr = jx;
 	e->fra.julci = jy;
 }

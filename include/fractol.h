@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/08 11:34:51 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:00:51 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,19 @@ enum				e_key
 	K_ESC = 53,
 	K_PLUS = 69,
 	K_LESS = 78,
+	K_1 = 18,
+	K_2,
+	K_3,
+	K_4,
 	K_P = 35,
 	K_O = 31,
 	K_I = 34,
 	K_U = 32,
+	K_SP = 49,
+	K_C1 = 83,
+	K_C2,
+	K_C3,
+	K_C4,
 	K_LEFT = 123,
 	K_RIGHT,
 	K_DOWN,
@@ -96,11 +105,21 @@ typedef struct		s_img
 	long double		y;
 }					t_img;
 
+typedef	struct		s_ptfunc
+{
+	t_color			(*ptcol1)(void);
+	t_color			(*ptcol2)(void);
+	t_color			(*ptcol3)(void);
+	t_color			(*ptcol4)(void);
+	t_color			(*ptcol5)(void);
+}					t_ptfunc;
+
 typedef struct		s_thrdata
 {
 	int				i_thr;
 	t_fractal		*fra;
 	t_img			*img;
+	t_ptfunc		*ptf;
 }					t_thrdata;
 
 typedef struct		s_env
@@ -110,16 +129,21 @@ typedef struct		s_env
 	int				fractol;
 	int				mouse;
 	int				keybd;
+	int				keycol;
 	long double		x_win;
 	long double		y_win;
 	void			*(*func[F_MAX])(void *arg);
 	pthread_t		thread[NB_THR];
 	t_img			img;
 	t_fractal		fra;
+	t_ptfunc		ptf;
 	t_color			c;
 }					t_env;
 
+void				change_color(t_env *e);
+int					key_quit(t_env *e);
 void				init_funct(t_env *e);
+void				init_color(t_env *e);
 void				send_thread(t_env *e);
 void				julia_move(t_env *e, int x, int y);
 void				*burningship(void *arg);
@@ -129,16 +153,11 @@ void				zoom_dok(t_env *e);
 void				move_do(t_env *e);
 void				move_r(t_env *e);
 void				move_l(t_env *e);
-void				redraw(t_env *e);
-int					expose_hook(t_env *e);
 int					mouse_hook(int button, int x, int y, t_env *e);
-int					mouse_release_hook(int button, int x, int y, t_env *e);
 int					mouse_motion_hook(int x, int y, t_env *e);
 int					key_hook(int keycode, t_env *e);
 int					key_release_hook(int keycode, t_env *e);
 int					key_press(t_env *e);
-unsigned int		colortohex(t_color color);
-unsigned int		set_color(int a, t_env *e);
 void				set_pxl(t_img *e, int x, int y, t_color color);
 t_color				color_r(void);
 t_color				color_g(void);
