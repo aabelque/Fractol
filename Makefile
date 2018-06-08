@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/07 16:15:13 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/08 11:34:27 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ SRC = srcs/main.c \
 	  srcs/mandelbrot2.c \
 	  srcs/clean.c \
 	  srcs/init_env.c \
-	  srcs/map_control.c \
 	  srcs/draw.c \
 	  srcs/julia.c \
 	  srcs/burningship.c \

@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/07 14:03:25 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/07 16:28:10 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void			zoom_dok(t_env *e)
 static	int		key_hook2(int keycode, t_env *e)
 {
 	if (keycode == K_I)
-		e->fra.i_max += 2;
+		e->keybd = 7;
 	if (keycode == K_U)
-		e->fra.i_max -= 2;
+		e->keybd = 8;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/07 16:12:22 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/08 11:34:51 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,7 @@ typedef	struct		s_fractal
 	long double		x2;
 	long double		y1;
 	long double		y2;
-	long double		cr;
-	long double		ci;
-	long double		zr;
-	long double		zi;
-	long double		tmp;
 	long double		zoom;
-	long double		deg;
 	long double		julcr;
 	long double		julci;
 	long double		n;
@@ -154,7 +148,6 @@ t_color				color_bc(void);
 t_color				color_y(void);
 t_color				interpol_color(t_color a, t_color b, double i);
 t_color				interpol_color2(t_color a, t_color b, t_color c, double i);
-int					out_map(long double x, long double y);
 void				init_env(t_env *e);
 void				init_env2(t_env *e, long double x, long double y);
 void				init_env3(t_env *e);
