@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 18:42:55 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/08 14:47:50 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/09 14:08:18 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_color			color_g(void)
 {
 	t_color		green;
 
-	green.r = 0;
+	green.r = 125;
 	green.g = 255;
-	green.b = 0;
+	green.b = 125;
 	green.a = 0;
 	return (green);
 }

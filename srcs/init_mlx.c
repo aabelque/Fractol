@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/08 16:45:54 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/09 13:50:16 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_funct(t_env *e)
 	e->func[F_JULIA] = &julia;
 	e->func[F_MANDEL2] = &mandelbrot3;
 	e->func[F_BURNIN] = &burningship;
+	e->func[F_BUDDHA] = &buddhabrot;
 }
 
 int		loop_hook(t_env *e)

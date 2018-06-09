@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 10:51:08 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/08 17:19:40 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/09 11:27:09 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			send_thread(t_env *e)
 	i = 0;
 	while (i < NB_THR)
 	{
-		data[i] = (t_thrdata){i, &e->fra, &e->img, &e->ptf};
+		data[i] = (t_thrdata){i, e->smth, &e->fra, &e->img, &e->ptf};
 		if (pthread_create(&e->thread[i], NULL, e->func[e->fractol], &data[i]))
 			ft_error("thread not create");
 		i++;

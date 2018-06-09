@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/08 17:09:13 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/09 15:25:07 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ static	int		key_hook2(int keycode, t_env *e)
 	}
 	if (keycode == K_C1)
 		e->keycol = 1;
+	if (keycode == K_C2)
+		e->keycol = 2;
+	if (keycode == K_C3)
+		e->keycol = 3;
+	if (keycode == K_C4)
+		e->keycol = 4;
+	if (keycode == K_C5)
+		e->keycol = 5;
+	key_hook3(keycode, e);
 	key_change_fractal(keycode, e);
 	return (0);
 }

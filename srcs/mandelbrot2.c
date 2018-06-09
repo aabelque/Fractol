@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:29:30 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/07 09:52:59 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/09 15:10:47 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static	int		mandelbrot2(t_thrdata *e, intmax_t x, intmax_t y,
 			* cos(e->fra->n * atan2(z.i, z.r)) + c.r;
 		z.i = pow((ztmp * ztmp) + (z.i * z.i), e->fra->n / 2)
 			* sin(e->fra->n * atan2(z.i, ztmp)) + c.i;
-		tmp = z.r * z.r + z.i * z.i;
+		tmp = log(z.r * z.r + z.i * z.i) / 2.0f;
 		if (tmp >= 4)
 		{
-			*deg = log(log(tmp)) / log(e->fra->n);
+			*deg = log(tmp / log(e->smth)) / log(e->smth);
 			return (i);
 		}
 	}
@@ -59,10 +59,11 @@ void			*mandelbrot3(void *arg)
 		{
 			i = mandelbrot2(e, x, y, &deg);
 			if (i >= e->fra->i_max)
-				set_pxl(e->img, x, y, color_bc());
+				set_pxl(e->img, x, y, e->ptf->ptcol4());
 			else
-				set_pxl(e->img, x, y, interpol_color2(color_bl(), color_b(),
-							color_g(), (((double)i + (1 - deg))
+				set_pxl(e->img, x, y, interpol_color2(e->ptf->ptcol2(),
+							e->ptf->ptcol1(),
+							e->ptf->ptcol3(), (((double)i + (1 - deg))
 								/ ((double)e->fra->i_max))));
 		}
 		x += NB_THR;

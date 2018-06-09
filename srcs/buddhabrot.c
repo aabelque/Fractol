@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   buddhabrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 15:30:59 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/09 15:06:45 by aabelque         ###   ########.fr       */
+/*   Created: 2018/06/09 13:45:01 by aabelque          #+#    #+#             */
+/*   Updated: 2018/06/09 14:05:15 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static	int		mandelbrot2(t_thrdata *e, intmax_t x, intmax_t y,
+static	int		buddhabrot2(t_thrdata *e, intmax_t x, intmax_t y,
 		long double *deg)
 {
 	int			i;
@@ -31,17 +31,17 @@ static	int		mandelbrot2(t_thrdata *e, intmax_t x, intmax_t y,
 		ztmp = z.r;
 		z.r = z.r * z.r - z.i * z.i + c.r;
 		z.i = 2 * z.i * ztmp + c.i;
-		tmp = log(z.r * z.r + z.i * z.i) / 2.0f;
-		if (tmp >= 4)
+		tmp = z.r * z.r + z.i * z.i;
+		if (tmp >= 10)
 		{
-			*deg = log(tmp / log(e->smth)) / log(e->smth);
+			*deg = log(log(tmp)) / log(e->smth);
 			return (i);
 		}
 	}
 	return (i);
 }
 
-void			*mandelbrot(void *arg)
+void			*buddhabrot(void *arg)
 {
 	intmax_t	x;
 	intmax_t	y;
@@ -56,15 +56,15 @@ void			*mandelbrot(void *arg)
 		y = -1;
 		while (++y < Y_WIN)
 		{
-			i = mandelbrot2(e, x, y, &deg);
+			i = buddhabrot2(e, x, y, &deg);
 			if (i >= e->fra->i_max)
-				set_pxl(e->img, x, y, e->ptf->ptcol4());
-			else
 				set_pxl(e->img, x, y, interpol_color2(e->ptf->ptcol1(),
 							e->ptf->ptcol2(),
 							e->ptf->ptcol3(), (((double)i + (1 - deg))
 								/ ((double)e->fra->i_max))));
-		}
+			else
+				set_pxl(e->img, x, y, e->ptf->ptcol4());
+					}
 		x += NB_THR;
 	}
 	pthread_exit(NULL);

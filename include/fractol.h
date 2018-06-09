@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/08 17:00:51 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/09 14:12:23 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ enum				e_key
 	K_I = 34,
 	K_U = 32,
 	K_SP = 49,
+	K_C0 = 82,
 	K_C1 = 83,
 	K_C2,
 	K_C3,
 	K_C4,
+	K_C5,
+	K_X = 7,
 	K_LEFT = 123,
 	K_RIGHT,
 	K_DOWN,
@@ -64,6 +67,7 @@ enum				e_fracts
 	F_JULIA,
 	F_MANDEL2,
 	F_BURNIN,
+	F_BUDDHA,
 	F_MAX
 };
 
@@ -117,6 +121,7 @@ typedef	struct		s_ptfunc
 typedef struct		s_thrdata
 {
 	int				i_thr;
+	long double		smth;
 	t_fractal		*fra;
 	t_img			*img;
 	t_ptfunc		*ptf;
@@ -132,6 +137,7 @@ typedef struct		s_env
 	int				keycol;
 	long double		x_win;
 	long double		y_win;
+	long double		smth;
 	void			*(*func[F_MAX])(void *arg);
 	pthread_t		thread[NB_THR];
 	t_img			img;
@@ -141,6 +147,10 @@ typedef struct		s_env
 }					t_env;
 
 void				change_color(t_env *e);
+void				change_color2(t_env *e);
+void				change_color3(t_env *e);
+void				change_color4(t_env *e);
+void				change_color5(t_env *e);
 int					key_quit(t_env *e);
 void				init_funct(t_env *e);
 void				init_color(t_env *e);
@@ -156,6 +166,7 @@ void				move_l(t_env *e);
 int					mouse_hook(int button, int x, int y, t_env *e);
 int					mouse_motion_hook(int x, int y, t_env *e);
 int					key_hook(int keycode, t_env *e);
+int					key_hook3(int keycode, t_env *e);
 int					key_release_hook(int keycode, t_env *e);
 int					key_press(t_env *e);
 void				set_pxl(t_img *e, int x, int y, t_color color);
@@ -170,8 +181,10 @@ t_color				interpol_color2(t_color a, t_color b, t_color c, double i);
 void				init_env(t_env *e);
 void				init_env2(t_env *e, long double x, long double y);
 void				init_env3(t_env *e);
+void				init_env4(t_env *e);
 void				clean(t_env *e);
 void				*mandelbrot(void *arg);
+void				*buddhabrot(void *arg);
 void				*mandelbrot3(void *arg);
 void				*julia(void *arg);
 void				ft_error(char *str);
