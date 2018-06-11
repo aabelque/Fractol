@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 11:48:25 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/09 14:12:06 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/10 16:49:41 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static	int		key_press2(t_env *e)
 		change_color4(e);
 	if (e->keycol == 5)
 		change_color5(e);
+	if (e->keycol == 6)
+		change_color6(e);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/09 14:12:23 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/11 18:56:44 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include <stdlib.h>
+# include <complex.h>
 # include <math.h>
 # include <pthread.h>
 
@@ -24,7 +26,13 @@
 # define IMG_X 270
 # define IMG_Y 240
 
-# define NB_THR 4
+# define NB_THR 16
+
+# define ITER 1000
+
+# define RED(x) ((x & 0x00ff0000) >> 16)
+# define GREEN(x) ((x & 0x0000ff00) >> 8)
+# define BLUE(x) (x & 0x000000ff)
 
 enum				e_mouse
 {
@@ -54,6 +62,7 @@ enum				e_key
 	K_C3,
 	K_C4,
 	K_C5,
+	K_C6,
 	K_X = 7,
 	K_LEFT = 123,
 	K_RIGHT,
@@ -68,8 +77,15 @@ enum				e_fracts
 	F_MANDEL2,
 	F_BURNIN,
 	F_BUDDHA,
+	F_TREE,
 	F_MAX
 };
+
+typedef	struct		s_tree
+{
+	int				x;
+	int				y;
+}					t_tree;
 
 typedef struct		s_color
 {
@@ -89,6 +105,11 @@ typedef	struct		s_fractal
 	long double		julcr;
 	long double		julci;
 	long double		n;
+	long double		size_tree;
+	long double		size_tree2;
+	int				r;
+	int				g;
+	int				b;
 	int				i_max;
 }					t_fractal;
 
@@ -118,6 +139,22 @@ typedef	struct		s_ptfunc
 	t_color			(*ptcol5)(void);
 }					t_ptfunc;
 
+typedef	struct		s_bb
+{
+	char			*esc;
+	long double		*cntesc;
+	long double		max;
+	long double		*cntfreq;
+	long double		numesc;
+	long double		prctlim[10];
+	long double		mean;
+	long double		wth;
+	long double		hgt;
+	long double		iter;
+	long double		maxoffs;
+	long double		nebula;
+}					t_bb;
+
 typedef struct		s_thrdata
 {
 	int				i_thr;
@@ -146,11 +183,35 @@ typedef struct		s_env
 	t_color			c;
 }					t_env;
 
+void				*launch_bb(void *arg);
+void				bb_calc(t_thrdata *b, t_bb *bb);
+void				bb_cmp_stat(t_bb *bb);
+void				bb_draw(t_thrdata *b, t_bb *bb);
+void				bb_plot_esc(t_thrdata *b, t_bb *bb);
+void				bb_plot_callb(t_bb *bb, complex double z);
+void				bb_calc_esc(t_thrdata *b, t_bb *bb);
+void				putpixel(t_img *b, int c, int x, int y);
+int					iterate(t_bb *bb, int x, int y, void (*cb)(t_bb*,
+			complex double));
+void				cxpx(t_bb *bb, complex double z, int *x, int *y);
+complex	double		pxcx(t_bb *bb, int x, int y);
+int					getcolor(t_bb *bb, int cnt);
+int					rank_int_perc(t_bb *bb, int lo, int hi, int c);
+int					rgb(double r, double g, double b);
+void				bb_free(t_bb *bb);
+void				bb_init(t_bb *bb, int width, int height, int iter,
+		int nebula);
+void				send_tree(t_env *e, int iter);
+void				tree(t_env *e, t_tree start, long double angle,
+		int iter);
+void				tree_move(t_env *e, int x, int y);
+void				set_pxl2(t_img e, int x, int y, int color);
 void				change_color(t_env *e);
 void				change_color2(t_env *e);
 void				change_color3(t_env *e);
 void				change_color4(t_env *e);
 void				change_color5(t_env *e);
+void				change_color6(t_env *e);
 int					key_quit(t_env *e);
 void				init_funct(t_env *e);
 void				init_color(t_env *e);
@@ -182,6 +243,7 @@ void				init_env(t_env *e);
 void				init_env2(t_env *e, long double x, long double y);
 void				init_env3(t_env *e);
 void				init_env4(t_env *e);
+void				init_env5(t_env *e);
 void				clean(t_env *e);
 void				*mandelbrot(void *arg);
 void				*buddhabrot(void *arg);

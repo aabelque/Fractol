@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 16:02:06 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/09 15:29:36 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/11 18:51:20 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void		zoom_upm(t_env *e, int x, int y)
 	long double	p;
 	long double	sh;
 
-	sh = (0.1 * (e->fra.y2 - e->fra.y1)) / 2.0f;
+	sh = (0.1 * (e->fra.y2 - e->fra.y1)) / 2;
 	p = (long double)y / (long double)Y_WIN;
 	e->fra.y1 += sh * p;
 	e->fra.y2 -= sh * (1 - p);
-	sh = (0.1 * (e->fra.x2 - e->fra.x1)) / 2.0f;
+	sh = (0.1 * (e->fra.x2 - e->fra.x1)) / 2;
 	p = (long double)x / (long double)X_WIN;
 	e->fra.x1 += sh * p;
 	e->fra.x2 -= sh * (1 - p);
@@ -33,11 +33,11 @@ static void		zoom_dom(t_env *e, int x, int y)
 	long double	p;
 	long double	sh;
 
-	sh = (0.1 * (e->fra.y2 - e->fra.y1)) / 2.0f;
+	sh = (0.1 * (e->fra.y2 - e->fra.y1)) / 2;
 	p = (long double)y / (long double)Y_WIN;
 	e->fra.y1 -= sh * p;
 	e->fra.y2 += sh * (1 - p);
-	sh = (0.1 * (e->fra.x2 - e->fra.x1)) / 2.0f;
+	sh = (0.1 * (e->fra.x2 - e->fra.x1)) / 2;
 	p = (long double)x / (long double)X_WIN;
 	e->fra.x1 -= sh * p;
 	e->fra.x2 += sh * (1 - p);
@@ -46,8 +46,10 @@ static void		zoom_dom(t_env *e, int x, int y)
 
 int				mouse_motion_hook(int x, int y, t_env *e)
 {
-	if (e->mouse == 1)
+	if (e->mouse == 1 && e->fractol == F_JULIA)
 		julia_move(e, x, y);
+	else if (e->mouse == 1 && e->fractol == F_TREE)
+		tree_move(e, x, y);
 	return (0);
 }
 

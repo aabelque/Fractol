@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 15:25:46 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/09 14:12:16 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/11 18:17:19 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,18 @@ void			init_env4(t_env *e)
 	e->fra.i_max = 25600;
 	e->fra.n = 3;
 	e->smth = 5000;
+}
+
+void			init_env5(t_env *e)
+{
+	e->fra.x1 = 0;
+	e->fra.x2 = -100;
+	e->fra.zoom = 1;
+	e->fra.i_max = 10;
+	e->fra.size_tree = 1;
+	e->fra.size_tree2 = 1;
+	e->fra.r = 6;
+	e->fra.g = 2;
+	e->fra.b = 10;
+	e->mouse = 1;
 }

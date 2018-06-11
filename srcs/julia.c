@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 06:02:48 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/09 15:07:59 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/11 17:59:28 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ void			julia_move(t_env *e, int x, int y)
 	long double	jx;
 	long double	jy;
 
-	jx = ((long double)x - e->x_win / 2) / 1000;
-	jy = ((long double)y - e->y_win / 2) / 1000;
+	x -= e->x_win / 2;
+	y -= e->y_win / 2;
+	jx = ((long double)x / e->x_win) * 2;
+	jy = ((long double)y / e->y_win) * 2;
 	e->fra.julcr = jx;
 	e->fra.julci = jy;
 }

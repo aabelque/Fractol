@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/09 13:50:54 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/11 17:20:51 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,13 @@ SRC = srcs/main.c \
 	  srcs/clean.c \
 	  srcs/init_env.c \
 	  srcs/draw.c \
+	  srcs/tree.c \
 	  srcs/julia.c \
 	  srcs/burningship.c \
 	  srcs/colors.c \
 	  srcs/set_color.c \
 	  srcs/change_color.c \
+	  srcs/change_color2.c \
 	  srcs/key_hook.c \
 	  srcs/key_hook2.c \
 	  srcs/mouse_hook.c \

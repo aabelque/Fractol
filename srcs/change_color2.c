@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_thread.c                                       :+:      :+:    :+:   */
+/*   change_color2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/06 10:51:08 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/11 12:54:39 by aabelque         ###   ########.fr       */
+/*   Created: 2018/06/10 16:43:33 by aabelque          #+#    #+#             */
+/*   Updated: 2018/06/10 17:41:03 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void			send_thread(t_env *e)
+static t_color			color_yy(void)
 {
-	int			i;
-	t_thrdata	data[NB_THR];
+	t_color				red;
 
-	i = 0;
-	while (i < NB_THR)
-	{
-		data[i] = (t_thrdata){i, e->smth, &e->fra, &e->img, &e->ptf};
-		if (pthread_create(&e->thread[i], NULL, e->func[e->fractol], &data[i]))
-			ft_error("thread not create");
-		i++;
-	}
-	i = 0;
-	while (i < NB_THR)
-	{
-		if (pthread_join(e->thread[i], NULL) != 0)
-			ft_error("thread not join");
-		i++;
-	}
+	red.r = 255;
+	red.g = 140;
+	red.b = 50;
+	red.a = 0;
+	return (red);
+}
+
+void					change_color6(t_env *e)
+{
+	e->ptf.ptcol1 = color_bc;
+	e->ptf.ptcol2 = color_yy;
+	e->ptf.ptcol3 = color_bc;
+	e->ptf.ptcol4 = color_bc;
+	e->keycol = 0;
 }
