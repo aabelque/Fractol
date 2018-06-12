@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 15:25:46 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/11 18:17:19 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/12 19:11:28 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void			init_env(t_env *e)
 	e->fra.i_max = 50;
 	e->fra.n = 3;
 	e->smth = 5000.0;
+	e->keyf = 0;
 }
 
 void			init_env2(t_env *e, long double x, long double y)
@@ -47,6 +48,7 @@ void			init_env2(t_env *e, long double x, long double y)
 	e->fra.i_max = 150;
 	e->mouse = 1;
 	e->smth = 5000.0;
+	e->keyf = 0;
 }
 
 void			init_env3(t_env *e)
@@ -64,36 +66,20 @@ void			init_env3(t_env *e)
 	e->fra.i_max = 50;
 	e->fra.n = 3;
 	e->smth = 5000.0;
-}
-
-void			init_env4(t_env *e)
-{
-	long double	p;
-
-	init_color(e);
-	e->x_win = X_WIN;
-	e->y_win = Y_WIN;
-	e->fra.x1 = -2.6;
-	e->fra.x2 = 2.2;
-	p = (e->fra.x2 - e->fra.x1) / X_WIN;
-	e->fra.y1 = -(p * Y_WIN) / 2;
-	e->fra.y2 = -e->fra.y1;
-	e->fra.zoom = X_WIN / ((e->fra.x2 - e->fra.x1));
-	e->fra.i_max = 25600;
-	e->fra.n = 3;
-	e->smth = 5000;
+	e->keyf = 0;
 }
 
 void			init_env5(t_env *e)
 {
 	e->fra.x1 = 0;
 	e->fra.x2 = -100;
-	e->fra.zoom = 1;
-	e->fra.i_max = 10;
-	e->fra.size_tree = 1;
-	e->fra.size_tree2 = 1;
-	e->fra.r = 6;
-	e->fra.g = 2;
-	e->fra.b = 10;
+	e->fra.zoom = 1.;
+	e->fra.i_max2 = 11.0;
+	e->fra.size_tree = 0.5;
+	e->fra.size_tree2 = 0.5;
+	e->fra.r = 5;
+	e->fra.g = 10;
+	e->fra.b = 1;
 	e->mouse = 1;
+	e->keyf = 0;
 }

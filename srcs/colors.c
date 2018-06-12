@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 10:11:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/10 17:45:28 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/12 19:16:39 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void			init_color(t_env *e)
 	e->ptf.ptcol2 = color_bl;
 	e->ptf.ptcol3 = color_r;
 	e->ptf.ptcol4 = color_bc;
-	e->ptf.ptcol5 = color_y;
 }
 
 t_color			color_y(void)

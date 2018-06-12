@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/11 17:20:51 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/12 19:08:40 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ SRC = srcs/main.c \
 	  srcs/init_mlx.c \
 	  srcs/parsing.c \
 	  srcs/mandelbrot.c \
-	  srcs/buddhabrot.c \
 	  srcs/mandelbrot2.c \
 	  srcs/clean.c \
 	  srcs/init_env.c \

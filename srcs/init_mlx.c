@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/11 18:50:41 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/12 19:09:04 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	init_funct(t_env *e)
 	e->func[F_JULIA] = &julia;
 	e->func[F_MANDEL2] = &mandelbrot3;
 	e->func[F_BURNIN] = &burningship;
-	e->func[F_BUDDHA] = &launch_bb;
 }
 
 int		loop_hook(t_env *e)
@@ -35,9 +34,25 @@ int		loop_hook(t_env *e)
 	if (e->fractol != F_TREE)
 		send_thread(e);
 	else
-		send_tree(e, e->fra.i_max);
+		send_tree(e, e->fra.i_max2);
 	if (mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0) == -1)
 		ft_error("fail to put image");
+	mlx_string_put(e->mlx, e->win, X_WIN - X_WIN, 1, 0xffffff,
+				"Press F16 to show Controls");
+	if (e->keyf == 1)
+	{
+		mlx_string_put(e->mlx, e->win, X_WIN - 300, 1, 0xffffff,
+				"Change Fractal: keybd 1 -> 5");
+		mlx_string_put(e->mlx, e->win, X_WIN - 300, 20, 0xffffff,
+				"Color: Num Keypad 1 -> 6");
+		mlx_string_put(e->mlx, e->win, X_WIN - 300, 39, 0xffffff,
+				"Iteration: I, U");
+		mlx_string_put(e->mlx, e->win, X_WIN - 300, 58, 0xffffff,
+				"Mandelbrot2: change form P, O");
+		mlx_string_put(e->mlx, e->win, X_WIN - 300, 77, 0xffffff,
+				"Smooth color: Num Keypad 0");
+	}
+	ft_bzero(e->img.addr, sizeof(int) * X_WIN * Y_WIN);
 	return (0);
 }
 

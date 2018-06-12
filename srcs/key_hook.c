@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/10 17:42:06 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/12 19:06:25 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void			zoom_dok(t_env *e)
 	e->fra.zoom = e->x_win / (e->fra.x2 - e->fra.x1);
 }
 
-static	int		key_change_fractal(int keycode, t_env *e)
+static	void	key_change_fractal(int keycode, t_env *e)
 {
 	if (keycode == K_1)
 	{
@@ -60,22 +60,23 @@ static	int		key_change_fractal(int keycode, t_env *e)
 		e->fractol = F_BURNIN;
 		init_env3(e);
 	}
-	return (0);
+	if (keycode == K_5)
+	{
+		e->fractol = F_TREE;
+		init_env5(e);
+	}
 }
 
 static	int		key_hook2(int keycode, t_env *e)
 {
+	if (keycode == K_F16)
+		e->keyf = (e->keyf == 0 ? 1 : 0);
 	if (keycode == K_I)
 		e->keybd = 7;
 	if (keycode == K_U)
 		e->keybd = 8;
 	if (keycode == K_SP)
-	{
-		if (e->mouse == 1)
-			e->mouse = 0;
-		else
-			e->mouse = 1;
-	}
+		e->mouse = (e->mouse == 0 ? 1 : 0);
 	if (keycode == K_C1)
 		e->keycol = 1;
 	if (keycode == K_C2)

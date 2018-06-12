@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 16:36:59 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/09 15:10:11 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/12 19:14:18 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void			*burningship(void *arg)
 			if (i >= e->fra->i_max)
 				set_pxl(e->img, x, y, e->ptf->ptcol4());
 			else
-				set_pxl(e->img, x, y, interpol_color2(e->ptf->ptcol2(),
-							e->ptf->ptcol5(),
-							e->ptf->ptcol1(), (((double)i + (1 - deg))
+				set_pxl(e->img, x, y, interpol_color2(e->ptf->ptcol1(),
+							e->ptf->ptcol2(),
+							e->ptf->ptcol3(), (((double)i + (1 - deg))
 								/ ((double)e->fra->i_max))));
 		}
 		x += NB_THR;

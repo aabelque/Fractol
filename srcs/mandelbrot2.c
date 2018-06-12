@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 13:29:30 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/09 15:10:47 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/12 14:47:14 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void			*mandelbrot3(void *arg)
 			if (i >= e->fra->i_max)
 				set_pxl(e->img, x, y, e->ptf->ptcol4());
 			else
-				set_pxl(e->img, x, y, interpol_color2(e->ptf->ptcol2(),
-							e->ptf->ptcol1(),
+				set_pxl(e->img, x, y, interpol_color2(e->ptf->ptcol1(),
+							e->ptf->ptcol2(),
 							e->ptf->ptcol3(), (((double)i + (1 - deg))
 								/ ((double)e->fra->i_max))));
 		}

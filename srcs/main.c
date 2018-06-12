@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:18:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/10 15:52:40 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/12 16:06:36 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,14 @@ Move:\n\
 	Up: Up Arrow\n\
 	Down: Down Arrow\n\
 \n\
-Scale:\n\
+Zoom:\n\
 	Widen: +\n\
 	Narrow: -\n\
+	Scroll: Up Down\n\
+\n\
+Iteration:\n\
+	Inc: I\n\
+	Decr: U\n\
 __________________________\n\
 ");
 }
