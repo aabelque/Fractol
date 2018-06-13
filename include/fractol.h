@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/13 11:36:45 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/13 15:16:27 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # define Y_WIN 720
 
 # define NB_THR 16
-
-# define ITER 1000
 
 enum				e_mouse
 {
@@ -44,6 +42,7 @@ enum				e_key
 	K_3,
 	K_4,
 	K_5 = 23,
+	K_6,
 	K_P = 35,
 	K_O = 31,
 	K_I = 34,
@@ -72,6 +71,7 @@ enum				e_fracts
 	F_BURNIN,
 	F_BUDDHA,
 	F_TREE,
+	F_SPONGE,
 	F_MAX
 };
 
@@ -178,6 +178,7 @@ void				init_color(t_env *e);
 void				send_thread(t_env *e);
 void				julia_move(t_env *e, int x, int y);
 void				*burningship(void *arg);
+void				*sponge(void *arg);
 void				move_up(t_env *e);
 void				zoom_upk(t_env *e);
 void				zoom_dok(t_env *e);
@@ -202,6 +203,7 @@ t_color				interpol_color2(t_color a, t_color b, t_color c, double i);
 void				init_env(t_env *e);
 void				init_env2(t_env *e, long double x, long double y);
 void				init_env3(t_env *e);
+void				init_env4(t_env *e);
 void				init_env5(t_env *e);
 void				clean(t_env *e);
 void				*mandelbrot(void *arg);
