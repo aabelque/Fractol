@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:28:34 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/13 11:35:17 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/13 13:39:47 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ int			parsing_arg2(char *str, t_env *e)
 	{
 		e->fractol = F_TREE;
 		init_env5(e);
+		return (1);
+	}
+	if (ft_strequ(str, "Sponge"))
+	{
+		e->fractol = F_SPONGE;
+		init_env4(e);
 		return (1);
 	}
 	else

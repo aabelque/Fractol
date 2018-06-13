@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/13 11:37:53 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/13 17:47:42 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static	int		key_hook2(int keycode, t_env *e)
 	if (keycode == K_C6)
 		e->keycol = 6;
 	key_change_fractal(keycode, e);
+	key_hook3(keycode, e);
 	return (0);
 }
 
@@ -98,9 +99,9 @@ int				key_hook(int keycode, t_env *e)
 	if (keycode == K_ESC)
 		key_quit(e);
 	if (keycode == K_PLUS)
-		e->keybd = 1;
+		(e->fractol != F_SPONGE) ? (e->keybd = 1) : (e->fra.zoom *= 1.1);
 	if (keycode == K_LESS)
-		e->keybd = 2;
+		(e->fractol != F_SPONGE) ? (e->keybd = 2) : (e->fra.zoom /= 1.1);
 	if (keycode == K_UP)
 		e->keybd = 3;
 	if (keycode == K_DOWN)
@@ -113,7 +114,11 @@ int				key_hook(int keycode, t_env *e)
 		e->fra.n += 0.2;
 	if (keycode == K_O)
 		e->fra.n -= 0.2;
-	key_hook3(keycode, e);
+	if (keycode == K_6)
+	{
+		e->fractol = F_SPONGE;
+		init_env4(e);
+	}
 	key_hook2(keycode, e);
 	return (0);
 }

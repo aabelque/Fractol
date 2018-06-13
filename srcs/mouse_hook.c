@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 16:02:06 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/12 14:26:16 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/13 17:19:21 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int				mouse_motion_hook(int x, int y, t_env *e)
 
 int				mouse_hook(int button, int x, int y, t_env *e)
 {
-	if ((button == M_SCUP || button == K_PLUS) && e->fractol != F_TREE)
-		zoom_upm(e, x, y);
-	if ((button == M_SCDO || button == K_LESS) && e->fractol != F_TREE)
-		zoom_dom(e, x, y);
+	if ((button == M_SCUP) && e->fractol != F_TREE)
+		(e->fractol != F_SPONGE) ? (zoom_upm(e, x, y)) : (e->fra.zoom *= 1.1);
+	if ((button == M_SCDO) && e->fractol != F_TREE)
+		(e->fractol != F_SPONGE) ? (zoom_dom(e, x, y)) : (e->fra.zoom /= 1.1);
 	if (button == M_RC && e->fractol == F_JULIA)
 		init_env2(e, 0.285, 0.01);
 	return (0);

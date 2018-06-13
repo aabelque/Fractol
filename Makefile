@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/13 11:42:23 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/13 13:37:41 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = srcs/main.c \
 	  srcs/draw.c \
 	  srcs/tree.c \
 	  srcs/julia.c \
+	  srcs/sponge.c \
 	  srcs/burningship.c \
 	  srcs/colors.c \
 	  srcs/set_color.c \
