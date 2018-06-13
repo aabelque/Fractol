@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/12 19:06:25 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/13 11:37:53 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static	void	key_change_fractal(int keycode, t_env *e)
 	}
 	if (keycode == K_3)
 	{
-		e->fractol = F_MANDEL2;
+		e->fractol = F_MULTI;
 		init_env(e);
 	}
 	if (keycode == K_4)

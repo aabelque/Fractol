@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot2.c                                      :+:      :+:    :+:   */
+/*   multibrot.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/24 13:29:30 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/12 14:47:14 by aabelque         ###   ########.fr       */
+/*   Created: 2018/06/13 11:41:03 by aabelque          #+#    #+#             */
+/*   Updated: 2018/06/13 11:41:11 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static	int		mandelbrot2(t_thrdata *e, intmax_t x, intmax_t y,
+static	int		multibrot2(t_thrdata *e, intmax_t x, intmax_t y,
 		long double *deg)
 {
 	int			i;
@@ -42,7 +42,7 @@ static	int		mandelbrot2(t_thrdata *e, intmax_t x, intmax_t y,
 	return (i);
 }
 
-void			*mandelbrot3(void *arg)
+void			*multibrot(void *arg)
 {
 	intmax_t	x;
 	intmax_t	y;
@@ -57,7 +57,7 @@ void			*mandelbrot3(void *arg)
 		y = -1;
 		while (++y < Y_WIN)
 		{
-			i = mandelbrot2(e, x, y, &deg);
+			i = multibrot2(e, x, y, &deg);
 			if (i >= e->fra->i_max)
 				set_pxl(e->img, x, y, e->ptf->ptcol4());
 			else

@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/12 19:17:50 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/13 11:36:45 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ enum				e_fracts
 {
 	F_MANDEL,
 	F_JULIA,
-	F_MANDEL2,
+	F_MULTI,
 	F_BURNIN,
 	F_BUDDHA,
 	F_TREE,
@@ -206,7 +206,7 @@ void				init_env5(t_env *e);
 void				clean(t_env *e);
 void				*mandelbrot(void *arg);
 void				*buddhabrot(void *arg);
-void				*mandelbrot3(void *arg);
+void				*multibrot(void *arg);
 void				*julia(void *arg);
 void				ft_error(char *str);
 void				ft_malloc_error(t_env *e);

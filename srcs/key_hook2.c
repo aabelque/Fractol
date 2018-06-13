@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 11:48:25 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/12 18:31:13 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/13 11:39:46 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int				key_hook3(int keycode, t_env *e)
 {
 	if (keycode == K_C0)
 	{
-		if (e->smth == 5000.0 && e->fractol != F_MANDEL2)
+		if (e->smth == 5000.0 && e->fractol != F_MULTI)
 			e->smth = 2.0;
-		else if (e->smth == 5000.0 && e->fractol == F_MANDEL2)
+		else if (e->smth == 5000.0 && e->fractol == F_MULTI)
 			e->smth = e->fra.n;
 		else
 			e->smth = 5000.0;

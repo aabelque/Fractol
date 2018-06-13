@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/12 19:09:04 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/13 11:36:15 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_funct(t_env *e)
 {
 	e->func[F_MANDEL] = &mandelbrot;
 	e->func[F_JULIA] = &julia;
-	e->func[F_MANDEL2] = &mandelbrot3;
+	e->func[F_MULTI] = &multibrot;
 	e->func[F_BURNIN] = &burningship;
 }
 
