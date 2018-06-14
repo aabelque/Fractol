@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/13 15:39:07 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/14 16:07:20 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <math.h>
 # include <pthread.h>
 
-# define X_WIN 1280
+# define X_WIN 1024
 # define Y_WIN 720
 
 # define NB_THR 16
