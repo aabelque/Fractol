@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:20:10 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/13 11:43:29 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/14 15:56:29 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ Usage: ./fractol <Fractal's name>\n\
 \n\
 Fractal's name:\n\
 	| Mandelbrot   |\n\
-	| Julia		   |\n\
+	| Julia        |\n\
 	| Multibrot    |\n\
 	| Burningship  |\n\
-	| Tree 		   |\n\
+	| Tree         |\n\
+	| Sponge       |\n\
 ____________________________________\n\
 ");
 }
