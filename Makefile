@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/13 13:37:41 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/17 11:33:51 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,8 @@ OBJS = $(SRC:%.c=%.o)
 	INCFILE = fractol.h
 	INC = $(addprefix $(INCDIR), $(INCFILE))
 
+OBJCU = $(CUSRC:%.cu=%.o)
+
 LIBPATH = libs/
 
 LFTDIR = libft/
@@ -61,6 +63,10 @@ LMLXDIR = minilibx/
 LMLXPATH = $(addprefix $(LIBPATH), $(LMLXDIR))
 LIBMLX = libmlx.a
 MLXLK = mlx
+
+CUDA = /Developer/NVIDIA/CUDA-9.1
+NVCC = /Developer/NVIDIA/CUDA-9.1/bin/nvcc
+NVCC_LIB = -L/Developer/NVIDIA/CUDA-9.1/lib
 
 ALLINCS = -I$(LFTPATH) -I$(LMLXPATH) -I$(INCDIR)
 
@@ -86,6 +92,14 @@ $(LFTPATH)$(LIBFT):
 
 $(LMLXPATH)$(LIBMLX):
 	$(MAKE) -C $(LMLXPATH)
+
+normelibft:
+	$(MAKE) -C $(LFTPATH) norme
+
+norme:
+	@norminette $(SRC)
+	@norminette $(INC)
+	@echo "\033[3;32m[ ✔ ] Norme is done.\033[0m"
 
 clean:
 	$(MAKE) -C $(LFTPATH) clean

@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 12:03:18 by aabelque          #+#    #+#              #
-#    Updated: 2018/05/19 15:04:37 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/17 11:33:50 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,9 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $<
 	@echo "\033[33m✔ \c"
 
+norme:
+	@norminette $(SRC)
+	@echo "\033[3;32m[ ✔ ] Norme is done.\033[0m"
 clean:
 	@/bin/rm -f $(OBJ)
 	@echo "\033[32m[ ✔ ] Cleaned up object files.\033[0m"
