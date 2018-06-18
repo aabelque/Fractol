@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/17 11:35:06 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/18 17:04:28 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <stdlib.h>
 # include <math.h>
 # include <pthread.h>
+
+# ifdef __APPLE_
+#  include <OpenCL/cl.h>
+# else
+#  include <CL.cl.h>
+# endif
 
 # define X_WIN 1024
 # define Y_WIN 720
@@ -74,6 +80,21 @@ enum				e_fracts
 	F_SPONGE,
 	F_MAX
 };
+
+typedef	struct		s_opencl
+{
+	int					dev_type;
+	cl_int				err;
+	size_t				global;
+	size_t				local;
+	const char			*kernel_src;
+	cl_platform_id		platform_id;
+	cl_device_id		device_id;
+	cl_context			context;
+	cl_command_queue	commands;
+	cl_program			program;
+	cl_kernel			*kernel;
+}					t_opencl;
 
 typedef	struct		s_tree
 {

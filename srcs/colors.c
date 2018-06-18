@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 10:11:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/12 19:16:39 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/18 13:45:50 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_color			interpol_color2(t_color a, t_color b, t_color c, double i)
 {
 	t_color		new_color;
 
+	i = fmax(i, 0);
 	if (i <= 0.5)
 	{
 		new_color.r = a.r + (b.r - a.r) * i * 2;

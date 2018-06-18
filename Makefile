@@ -6,11 +6,11 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/17 11:33:51 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/18 17:07:03 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FRAMEWORKS = -framework OpenGL -framework AppKit
+FRAMEWORKS = -framework OpenGL -framework AppKit -framework OpenCL
 
 NAME = fractol
 
