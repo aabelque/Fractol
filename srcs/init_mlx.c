@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/17 11:35:37 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/27 10:10:09 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ void	init_funct(t_env *e)
 int		loop_hook(t_env *e)
 {
 	key_press(e);
-	(e->fractol != F_TREE) ? (send_thread(e)) : (send_tree(e, e->fra.i_max2));
+	(e->device == 2) ? opencl_draw(&e->opcl, e, e->opcl.deg) : (void)e;
+	if (e->device == 1)
+		(e->fractol != F_TREE) ? (send_thread(e)) : (send_tree(e, e->fra.i_max2));
 	if (mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0) == -1)
 		ft_error("fail to put image");
 	mlx_string_put(e->mlx, e->win, X_WIN - X_WIN, 1, 0xffffff,

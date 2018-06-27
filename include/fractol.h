@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/18 17:04:28 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/27 10:01:01 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include <math.h>
 # include <pthread.h>
 
-# ifdef __APPLE_
+# ifdef __APPLE__
 #  include <OpenCL/cl.h>
 # else
-#  include <CL.cl.h>
+#  include <CL/cl.h>
 # endif
 
 # define X_WIN 1024
@@ -75,40 +75,10 @@ enum				e_fracts
 	F_JULIA,
 	F_MULTI,
 	F_BURNIN,
-	F_BUDDHA,
 	F_TREE,
 	F_SPONGE,
 	F_MAX
 };
-
-typedef	struct		s_opencl
-{
-	int					dev_type;
-	cl_int				err;
-	size_t				global;
-	size_t				local;
-	const char			*kernel_src;
-	cl_platform_id		platform_id;
-	cl_device_id		device_id;
-	cl_context			context;
-	cl_command_queue	commands;
-	cl_program			program;
-	cl_kernel			*kernel;
-}					t_opencl;
-
-typedef	struct		s_tree
-{
-	int				x;
-	int				y;
-}					t_tree;
-
-typedef struct		s_color
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}					t_color;
 
 typedef	struct		s_fractal
 {
@@ -128,6 +98,42 @@ typedef	struct		s_fractal
 	int				i_max;
 	long double		i_max2;
 }					t_fractal;
+
+typedef	struct		s_opencl
+{
+	cl_device_type		dev_type;
+	long double			deg;
+	cl_int				err;
+	cl_uint				num_dev;
+	size_t				local;
+	size_t				img_s;
+	size_t				imgxy[2];
+	int					*bufhst;
+	cl_mem				input;
+	cl_mem				output;
+	const char			*kernel_src;
+	cl_platform_id		platform_id;
+	cl_device_id		device_id;
+	cl_context			context;
+	cl_command_queue	commands;
+	cl_program			program;
+	cl_kernel			kernel[4];
+	t_fractal			fra;
+}					t_opencl;
+
+typedef	struct		s_tree
+{
+	int				x;
+	int				y;
+}					t_tree;
+
+typedef struct		s_color
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}					t_color;
 
 typedef struct		s_cmplx
 {
@@ -172,6 +178,8 @@ typedef struct		s_env
 	int				keybd;
 	int				keycol;
 	int				keyf;
+	int				it;
+	int				device;
 	long double		x_win;
 	long double		y_win;
 	long double		smth;
@@ -180,7 +188,14 @@ typedef struct		s_env
 	t_img			img;
 	t_fractal		fra;
 	t_ptfunc		ptf;
+	t_opencl		opcl;
 }					t_env;
+
+void opencl_init(t_opencl *opcl);
+void opencl_draw(t_opencl *opcl, t_env *e, float deg);
+void set_opencl_env(t_opencl *opcl);
+void create_prog(t_opencl *opcl);
+void create_kernel(cl_program program, cl_kernel *kernel, const char *func);
 
 void				send_tree(t_env *e, int iter);
 void				tree(t_env *e, t_tree start, long double angle,
@@ -236,7 +251,7 @@ void				ft_malloc_error(t_env *e);
 void				ft_usage(void);
 int					init_mlx(t_env *e);
 int					loop_hook(t_env *e);
-int					parsing_arg(char *str, t_env *e);
-int					parsing_arg2(char *str, t_env *e);
+int					parsing_arg(char *str, char *s, t_env *e);
+int					parsing_arg2(char *str, char *s, t_env *e);
 int					main(int ac, char **av);
 #endif

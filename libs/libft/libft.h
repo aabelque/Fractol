@@ -6,14 +6,14 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 12:54:05 by aabelque          #+#    #+#             */
-/*   Updated: 2018/05/11 15:22:32 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/27 14:35:24 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define BUFF_SIZE 8192
+# define BUFF_SIZE 4096
 
 # include <unistd.h>
 # include <string.h>

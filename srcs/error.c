@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:20:10 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/14 15:56:29 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/25 18:21:53 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		ft_usage(void)
 {
 	ft_putstr("\
 ____________________________________\n\
-Usage: ./fractol <Fractal's name>\n\
+Usage: ./fractol [-cpu || -gpu] <Fractal's name>\n\
 \n\
 Fractal's name:\n\
 	| Mandelbrot   |\n\

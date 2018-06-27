@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/18 17:07:03 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/26 11:06:28 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,9 @@ SRC = srcs/main.c \
 	  srcs/key_hook2.c \
 	  srcs/mouse_hook.c \
 	  srcs/move.c \
-	  srcs/set_thread.c
-
+	  srcs/set_thread.c \
+	  srcs/opencl_init.c
+	  
 OBJS = $(SRC:%.c=%.o)
 	INCDIR = include/
 	INCFILE = fractol.h

@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:18:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/12 16:06:36 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/27 10:06:53 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,40 @@ __________________________\n\
 ");
 }
 
-int				main(int ac, char **av)
+static void		m_help(t_env *e)
 {
-	t_env		*e;
-
-	e = NULL;
-	if (ac != 2)
-		ft_error("Usage: ./fractol <Fractal's name>");
-	if (!(e = ft_memalloc(sizeof(t_env))))
-		ft_malloc_error(e);
-	if (parsing_arg(av[1], e) == -1 && parsing_arg2(av[1], e) == -1)
+	if (e->device == 0)
 	{
 		clean(e);
 		ft_usage();
 		exit(EXIT_FAILURE);
 	}
-	init_funct(e);
+	if (e->device == 1)
+		init_funct(e);
+	else
+	{
+		set_opencl_env(&e->opcl);
+		opencl_init(&e->opcl);
+	}
+}
+
+int				main(int ac, char **av)
+{
+	t_env		*e;
+
+	e = NULL;
+	if (ac != 3)
+		ft_error("Usage: ./fractol [-cpu || -gpu] <Fractal's name>");
+	if (!(e = ft_memalloc(sizeof(t_env))))
+		ft_malloc_error(e);
+	if (parsing_arg(av[1], av[2], e) == -1 &&
+			parsing_arg2(av[1], av[2], e) == -1)
+	{
+		clean(e);
+		ft_usage();
+		exit(EXIT_FAILURE);
+	}
+	m_help(e);
 	init_color(e);
 	init_mlx(e);
 	display_ctrl();
