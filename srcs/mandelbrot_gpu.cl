@@ -1,35 +1,34 @@
 #include "kernel.h"
 
-__kernel void mandelbrot_gpu(__global t_fractal *e, __write_only image2d_t out, float deg)
+__kernel void mandelbrot_gpu(__global unsigned int *out, double deg)
 {
 	int i;
-	int2 idx;
-	float tmp;
-	float	ztmp;
-	int4	col;
-	int4	col2;
+	int idx;
+	double tmp;
+	double	ztmp;
 	t_cmplx	c;
 	t_cmplx	z;
+	double zoom;
 
+	zoom = 1024 / (2.2 - (-2.6));
 	i = -1;
 	z.r = 0;
 	z.i = 0;
-	c.r = get_global_id(0) / e->zoom + e->x1;
-	c.i = get_global_id(1) / e->zoom + e->y1;
-	idx = (int2)(get_global_id(0), get_global_id(1));
-	col = (int4)(255, 255, 255, 0);
-	col2 = (int4)(0, 0, 0, 0);
-	while (++i < get_global_size(0))
+	c.r = get_global_id(0) / zoom + (-2.6);
+	c.i = get_global_id(1) / zoom + -((((2.2 - (-2.6)) / 1024) * 720) / 2);
+	idx = get_global_size(0) * get_global_id(1) + get_global_id(0);
+	while (++i < 100)
 	{
 		ztmp = z.r;
 		z.r = z.r * z.r - z.i * z.i + c.r;
 		z.i = 2 * z.i * ztmp + c.i;
-		tmp = log(z.r * z.r + z.i * z.i) / 2.0;
+		tmp = (z.r * z.r + z.i * z.i) / 2.0;
 		if (tmp >= 4)
 		{
 			deg = log(tmp / log(2.)) / log(2.);
-			write_imagei(out, idx, (col * (int4)deg));
+			out[idx] = 0xfffffff;
+			break;
 		}
-		write_imagei(out, idx, col);
 	}
+	out[idx] = i;
 }

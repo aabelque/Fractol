@@ -6,13 +6,13 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/27 10:10:09 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/28 11:16:08 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		key_quit(t_env *e)
+int				key_quit(t_env *e)
 {
 	mlx_destroy_window(e->mlx, e->win);
 	mlx_destroy_image(e->mlx, e->img.img);
@@ -20,7 +20,7 @@ int		key_quit(t_env *e)
 	exit(EXIT_SUCCESS);
 }
 
-void	init_funct(t_env *e)
+void			init_funct(t_env *e)
 {
 	e->func[F_MANDEL] = &mandelbrot;
 	e->func[F_JULIA] = &julia;
@@ -29,16 +29,8 @@ void	init_funct(t_env *e)
 	e->func[F_SPONGE] = &sponge;
 }
 
-int		loop_hook(t_env *e)
+static	int		loop_hook_help(t_env *e)
 {
-	key_press(e);
-	(e->device == 2) ? opencl_draw(&e->opcl, e, e->opcl.deg) : (void)e;
-	if (e->device == 1)
-		(e->fractol != F_TREE) ? (send_thread(e)) : (send_tree(e, e->fra.i_max2));
-	if (mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0) == -1)
-		ft_error("fail to put image");
-	mlx_string_put(e->mlx, e->win, X_WIN - X_WIN, 1, 0xffffff,
-				"Press F16 to show Controls");
 	if (e->keyf == 1)
 	{
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 1, 0xffffff,
@@ -56,11 +48,26 @@ int		loop_hook(t_env *e)
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 115, 0xffffff,
 				"Move: Arrow");
 	}
+	return (0);
+}
+
+int				loop_hook(t_env *e)
+{
+	key_press(e);
+	(e->device == 2) ? opencl_draw(&e->opcl, e, e->opcl.deg) : (void)e;
+	if (e->device == 1)
+		(e->fractol != F_TREE) ? (send_thread(e))
+			: (send_tree(e, e->fra.i_max2));
+	if (mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0) == -1)
+		ft_error("fail to put image");
+	mlx_string_put(e->mlx, e->win, X_WIN - X_WIN, 1, 0xffffff,
+				"Press F16 to show Controls");
+	loop_hook_help(e);
 	ft_bzero(e->img.addr, sizeof(int) * X_WIN * Y_WIN);
 	return (0);
 }
 
-int		init_mlx(t_env *e)
+int				init_mlx(t_env *e)
 {
 	if ((e->mlx = mlx_init()) == NULL)
 		return (EXIT_FAILURE);
