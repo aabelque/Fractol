@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/28 15:26:46 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:49:52 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,8 +195,8 @@ void				opencl_init(t_opencl *opcl);
 void				opencl_draw(t_opencl *opcl, t_env *e, double deg);
 void				set_opencl_env(t_opencl *opcl);
 void				create_prog(t_opencl *opcl);
-void				create_kernel(cl_program program, cl_kernel *kernel, const char *func);
-
+void				create_kernel(cl_program program, cl_kernel *kernel,
+		const char *func);
 void				send_tree(t_env *e, int iter);
 void				tree(t_env *e, t_tree start, long double angle,
 		int iter);
