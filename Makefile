@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/06/26 11:06:28 by aabelque         ###   ########.fr        #
+#    Updated: 2018/06/28 17:58:32 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,10 +64,6 @@ LMLXDIR = minilibx/
 LMLXPATH = $(addprefix $(LIBPATH), $(LMLXDIR))
 LIBMLX = libmlx.a
 MLXLK = mlx
-
-CUDA = /Developer/NVIDIA/CUDA-9.1
-NVCC = /Developer/NVIDIA/CUDA-9.1/bin/nvcc
-NVCC_LIB = -L/Developer/NVIDIA/CUDA-9.1/lib
 
 ALLINCS = -I$(LFTPATH) -I$(LMLXPATH) -I$(INCDIR)
 
