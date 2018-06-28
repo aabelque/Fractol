@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/28 15:27:03 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:42:22 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void			opencl_init(t_opencl *opcl)
 //			sizeof(int), NULL, NULL);
 	opcl->output = clCreateBuffer(opcl->context, CL_MEM_WRITE_ONLY,
 			sizeof(int) * opcl->img_s, NULL, NULL);
-	printf("%zu\n", sizeof(int));
 	create_prog(opcl);
 	create_kernel(opcl->program, &opcl->kernel[0], "mandelbrot_gpu");
 //	create_kernel(opcl->program, opcl->kernel[1], "julia_gpu");
@@ -146,11 +145,18 @@ void			opencl_draw(t_opencl *opcl, t_env *e, double deg)
 	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->output, CL_TRUE, 0,
 			sizeof(int) * opcl->img_s, opcl->bufhst, 0, NULL, NULL);
 	i = 0;
-	(void)deg;
 	while (i < opcl->img_s)
 	{
-		((int *)e->img.addr)[i] = opcl->bufhst[i];
+		e->it = opcl->bufhst[i];
+//		((int *)e->img.addr)[i] = opcl->bufhst[i];
 		//set_pxl2(e->img, i % X_WIN, i / X_WIN, e->it);
+		if (e->it > 50)
+			set_pxl(&e->img, i % X_WIN, i / X_WIN, e->ptf.ptcol4());
+		else
+			set_pxl(&e->img, i % X_WIN, i / X_WIN, interpol_color2(e->ptf.ptcol1(),
+						e->ptf.ptcol2(),
+						e->ptf.ptcol3(), (((double)e->it + (1 - deg))
+							/ ((double)e->fra.i_max))));
 		i++;
 	}
 }
