@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:28:34 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/09 19:11:18 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/09 19:29:02 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	int	parsing_arg3(char *s, t_env *e)
 		return (1);
 	}
 	else
-		return (-1);
+		return (0);
 }
 
 int			parsing_arg2(char *str, char *s, t_env *e)
@@ -47,9 +47,7 @@ int			parsing_arg2(char *str, char *s, t_env *e)
 		init_env4(e);
 		return (1);
 	}
-	else
-		return (-1);
-	return (0);
+	return (-1);
 }
 
 int			parsing_arg(char *str, char *s, t_env *e)
@@ -57,7 +55,8 @@ int			parsing_arg(char *str, char *s, t_env *e)
 	e->device = (ft_strequ(str, "-cpu") ? 1 : 0);
 	if (e->device == 0)
 		e->device = (ft_strequ(str, "-gpu") ? 2 : 0);
-	return ((parsing_arg3(s, e)) ? 1 : 0);
+	if (parsing_arg3(s, e))
+		return (1);
 	if (ft_strequ(s, "Mandelbrot"))
 	{
 		e->fractol = F_MANDEL;
@@ -76,7 +75,5 @@ int			parsing_arg(char *str, char *s, t_env *e)
 		init_env(e);
 		return (1);
 	}
-	else
-		return (-1);
-	return (0);
+	return (-1);
 }
