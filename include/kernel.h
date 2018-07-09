@@ -6,20 +6,12 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:16:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/28 13:59:35 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/09 17:57:55 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KERNEL_H
 # define KERNEL_H
-
-typedef	struct		s_color
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}					t_color;
 
 typedef	struct		s_cmplx
 {
@@ -37,6 +29,8 @@ typedef	struct		s_fractal
 	float			julcr;
 	float			julci;
 	float			n;
+	float			x_win;
+	float			y_win;
 	float			size_tree;
 	float			size_tree2;
 	float			smth;
@@ -46,4 +40,26 @@ typedef	struct		s_fractal
 	int				i_max;
 	float			i_max2;
 }					t_fractal;
+
+typedef struct		s_env
+{
+	//void			*mlx;
+	//void			*win;
+	int				fractol;
+	int				mouse;
+	int				keybd;
+	int				keycol;
+	int				keyf;
+	int				it;
+	int				device;
+	float		x_win;
+	float		y_win;
+	float		smth;
+	//void			*(*func[F_MAX])(void *arg);
+	//pthread_t		thread[NB_THR];
+	//t_img			img;
+	t_fractal		fra;
+	//t_ptfunc		ptf;
+	//t_opencl		opcl;
+}					t_env;
 #endif

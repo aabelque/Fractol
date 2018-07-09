@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/28 17:42:22 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/09 18:15:28 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		create_prog(t_opencl *opcl)
 	}
 }
 
-void			opencl_init(t_opencl *opcl)
+void			opencl_init(t_opencl *opcl, t_env *e)
 {
 	if (clGetPlatformIDs(1, &opcl->platform_id, NULL) != CL_SUCCESS)
 	{
@@ -119,10 +119,11 @@ void			opencl_init(t_opencl *opcl)
 	}
 	opcl->img_s = X_WIN * Y_WIN;
 	opcl->bufhst = (int *)ft_memalloc(opcl->img_s * sizeof(int)); 
-//	opcl->input = clCreateBuffer(opcl->context, CL_MEM_READ_ONLY,
-//			sizeof(int), NULL, NULL);
+//	opcl->input = clCreateBuffer(opcl->context, CL_MEM_WRITE_ONLY,
+//			sizeof(float), &e->fra.i_max, NULL);
 	opcl->output = clCreateBuffer(opcl->context, CL_MEM_WRITE_ONLY,
 			sizeof(int) * opcl->img_s, NULL, NULL);
+	(void)e;
 	create_prog(opcl);
 	create_kernel(opcl->program, &opcl->kernel[0], "mandelbrot_gpu");
 //	create_kernel(opcl->program, opcl->kernel[1], "julia_gpu");
@@ -134,12 +135,13 @@ void			opencl_init(t_opencl *opcl)
 void			opencl_draw(t_opencl *opcl, t_env *e, double deg)
 {
 	size_t		i;
+	
 	opcl->err = 0;
-	//opcl->err = clSetKernelArg(*opcl->kernel, 0, sizeof(t_fractal), &opcl->input);
 	opcl->err |= clSetKernelArg(*opcl->kernel, 0, sizeof(cl_mem), &opcl->output);
-	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(double), &deg);
+	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(int), &e->fra.i_max);
+	opcl->err |= clSetKernelArg(*opcl->kernel, 2, sizeof(float), &deg);
 //	opcl->err = clEnqueueWriteBuffer(opcl->commands, opcl->input, CL_TRUE, 0,
-//			sizeof(int), (const void *)&opcl->fra, 0, NULL, NULL);
+//			sizeof(e->fra.i_max), e, 0, NULL, NULL);
 	opcl->err = clEnqueueNDRangeKernel(opcl->commands, *opcl->kernel, 2, NULL,
 			opcl->imgxy, NULL, 0, NULL, NULL);
 	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->output, CL_TRUE, 0,
@@ -150,7 +152,7 @@ void			opencl_draw(t_opencl *opcl, t_env *e, double deg)
 		e->it = opcl->bufhst[i];
 //		((int *)e->img.addr)[i] = opcl->bufhst[i];
 		//set_pxl2(e->img, i % X_WIN, i / X_WIN, e->it);
-		if (e->it > 50)
+		if (e->it >= 50)
 			set_pxl(&e->img, i % X_WIN, i / X_WIN, e->ptf.ptcol4());
 		else
 			set_pxl(&e->img, i % X_WIN, i / X_WIN, interpol_color2(e->ptf.ptcol1(),

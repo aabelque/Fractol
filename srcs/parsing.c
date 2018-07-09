@@ -6,11 +6,23 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:28:34 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/26 12:33:24 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/09 19:11:18 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static	int	parsing_arg3(char *s, t_env *e)
+{
+	if (ft_strequ(s, "Tricorn"))
+	{
+		e->fractol = F_TRI;
+		init_env(e);
+		return (1);
+	}
+	else
+		return (-1);
+}
 
 int			parsing_arg2(char *str, char *s, t_env *e)
 {
@@ -45,6 +57,7 @@ int			parsing_arg(char *str, char *s, t_env *e)
 	e->device = (ft_strequ(str, "-cpu") ? 1 : 0);
 	if (e->device == 0)
 		e->device = (ft_strequ(str, "-gpu") ? 2 : 0);
+	return ((parsing_arg3(s, e)) ? 1 : 0);
 	if (ft_strequ(s, "Mandelbrot"))
 	{
 		e->fractol = F_MANDEL;

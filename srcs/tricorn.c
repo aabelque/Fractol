@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   burningship.c                                      :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/24 16:36:59 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/09 13:08:23 by aabelque         ###   ########.fr       */
+/*   Created: 2018/05/18 15:30:59 by aabelque          #+#    #+#             */
+/*   Updated: 2018/07/09 18:53:46 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static	int		burningship2(t_thrdata *e, intmax_t x, intmax_t y,
+static	int		tricorn2(t_thrdata *e, intmax_t x, intmax_t y,
 		long double *deg)
 {
 	int			i;
@@ -29,25 +29,24 @@ static	int		burningship2(t_thrdata *e, intmax_t x, intmax_t y,
 	while (++i < e->fra->i_max)
 	{
 		ztmp = z.r;
-		z.r = z.r * z.r - z.i * z.i
-			+ c.r;
-		z.i = fabsl(2 * z.i * ztmp) + c.i;
+		z.r = z.r * z.r - z.i * z.i + c.r;
+		z.i = -2 * z.i * ztmp + c.i;
 		tmp = log(z.r * z.r + z.i * z.i) / 2.0f;
 		if (tmp >= 4)
 		{
-			*deg = log(tmp / log((e->smth))) / log(e->smth);
+			*deg = log(tmp / log(e->smth)) / log(e->smth);
 			return (i);
 		}
 	}
 	return (i);
 }
 
-void			*burningship(void *arg)
+void			*tricorn(void *arg)
 {
 	intmax_t	x;
 	intmax_t	y;
 	int			i;
-	long double	deg;
+	long double deg;
 	t_thrdata	*e;
 
 	e = (t_thrdata *)arg;
@@ -57,7 +56,7 @@ void			*burningship(void *arg)
 		y = -1;
 		while (++y < Y_WIN)
 		{
-			i = burningship2(e, x, y, &deg);
+			i = tricorn2(e, x, y, &deg);
 			if (i >= e->fra->i_max)
 				set_pxl(e->img, x, y, e->ptf->ptcol4());
 			else

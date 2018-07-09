@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/09 19:01:02 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/09 16:25:54 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ enum				e_key
 	K_C4,
 	K_C5,
 	K_C6,
-	K_C7 = 26,
 	K_X = 7,
 	K_F16 = 106,
 	K_LEFT = 123,
@@ -78,7 +77,6 @@ enum				e_fracts
 	F_BURNIN,
 	F_TREE,
 	F_SPONGE,
-	F_TRI,
 	F_MAX
 };
 
@@ -246,7 +244,6 @@ void				init_env4(t_env *e);
 void				init_env5(t_env *e);
 void				clean(t_env *e);
 void				*mandelbrot(void *arg);
-void				*tricorn(void *arg);
 void				*buddhabrot(void *arg);
 void				*multibrot(void *arg);
 void				*julia(void *arg);

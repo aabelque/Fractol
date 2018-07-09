@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 15:25:46 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/13 17:22:50 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/09 16:15:05 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			init_env2(t_env *e, long double x, long double y)
 	e->fra.julcr = x;
 	e->fra.julci = y;
 	e->fra.zoom = X_WIN / (e->fra.x2 - e->fra.x1);
-	e->fra.i_max = 150;
+	e->fra.i_max = 50;
 	e->mouse = 1;
 	e->smth = 5000.0;
 	e->keyf = 0;

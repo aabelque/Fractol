@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/28 11:16:08 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/09 19:01:36 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void			init_funct(t_env *e)
 	e->func[F_MULTI] = &multibrot;
 	e->func[F_BURNIN] = &burningship;
 	e->func[F_SPONGE] = &sponge;
+	e->func[F_TRI] = &tricorn;
 }
 
 static	int		loop_hook_help(t_env *e)
@@ -34,7 +35,7 @@ static	int		loop_hook_help(t_env *e)
 	if (e->keyf == 1)
 	{
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 1, 0xffffff,
-				"Change Fractal: Keybd 1 -> 6");
+				"Change Fractal: Keybd 1 -> 7");
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 20, 0xffffff,
 				"Color: Num Keypad 1 -> 6");
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 39, 0xffffff,
