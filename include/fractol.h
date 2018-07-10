@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/09 19:01:02 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/10 15:42:52 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,34 +84,33 @@ enum				e_fracts
 
 typedef	struct		s_fractal
 {
-	long double		x1;
-	long double		x2;
-	long double		y1;
-	long double		y2;
-	long double		zoom;
-	long double		julcr;
-	long double		julci;
-	long double		n;
-	long double		size_tree;
-	long double		size_tree2;
+	double			x1;
+	double			x2;
+	double			y1;
+	double			y2;
+	double			zoom;
+	double			julcr;
+	double			julci;
+	double			n;
+	double			size_tree;
+	double			size_tree2;
 	int				r;
 	int				g;
 	int				b;
 	int				i_max;
-	long double		i_max2;
+	double			i_max2;
 }					t_fractal;
 
 typedef	struct		s_opencl
 {
 	cl_device_type		dev_type;
-	long double			deg;
+	double				deg;
 	cl_int				err;
 	cl_uint				num_dev;
 	size_t				local;
 	size_t				img_s;
 	size_t				imgxy[2];
 	int					*bufhst;
-	cl_mem		deg2;
 	cl_mem				input;
 	cl_mem				output;
 	const char			*kernel_src;
@@ -140,8 +139,8 @@ typedef struct		s_color
 
 typedef struct		s_cmplx
 {
-	long double		r;
-	long double		i;
+	double			r;
+	double			i;
 }					t_cmplx;
 
 typedef struct		s_img
@@ -151,8 +150,8 @@ typedef struct		s_img
 	int				bpp;
 	int				s_line;
 	int				endian;
-	long double		x;
-	long double		y;
+	double			x;
+	double			y;
 }					t_img;
 
 typedef	struct		s_ptfunc
@@ -166,7 +165,7 @@ typedef	struct		s_ptfunc
 typedef struct		s_thrdata
 {
 	int				i_thr;
-	long double		smth;
+	double			smth;
 	t_fractal		*fra;
 	t_img			*img;
 	t_ptfunc		*ptf;
@@ -183,9 +182,9 @@ typedef struct		s_env
 	int				keyf;
 	int				it;
 	int				device;
-	long double		x_win;
-	long double		y_win;
-	long double		smth;
+	double			x_win;
+	double			y_win;
+	double			smth;
 	void			*(*func[F_MAX])(void *arg);
 	pthread_t		thread[NB_THR];
 	t_img			img;
@@ -201,7 +200,7 @@ void				create_prog(t_opencl *opcl);
 void				create_kernel(cl_program program, cl_kernel *kernel,
 		const char *func);
 void				send_tree(t_env *e, int iter);
-void				tree(t_env *e, t_tree start, long double angle,
+void				tree(t_env *e, t_tree start, double angle,
 		int iter);
 void				tree_move(t_env *e, int x, int y);
 void				set_pxl2(t_img e, int x, int y, int color);
@@ -240,7 +239,7 @@ t_color				color_y(void);
 t_color				interpol_color(t_color a, t_color b, double i);
 t_color				interpol_color2(t_color a, t_color b, t_color c, double i);
 void				init_env(t_env *e);
-void				init_env2(t_env *e, long double x, long double y);
+void				init_env2(t_env *e, double x, double y);
 void				init_env3(t_env *e);
 void				init_env4(t_env *e);
 void				init_env5(t_env *e);

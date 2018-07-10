@@ -6,24 +6,24 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 06:02:48 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/09 15:25:25 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/10 12:40:38 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 static	int		julia2(t_thrdata *e, intmax_t x, intmax_t y,
-		long double *deg)
+		double *deg)
 {
 	int			i;
-	long double	tmp;
-	long double	ztmp;
+	double	tmp;
+	double	ztmp;
 	t_cmplx		z;
 	t_cmplx		c;
 
 	i = -1;
-	z.r = (long double)x / e->fra->zoom + e->fra->x1;
-	z.i = (long double)y / e->fra->zoom + e->fra->y1;
+	z.r = (double)x / e->fra->zoom + e->fra->x1;
+	z.i = (double)y / e->fra->zoom + e->fra->y1;
 	c.r = e->fra->julcr;
 	c.i = e->fra->julci;
 	while (++i < e->fra->i_max)
@@ -46,7 +46,7 @@ void			*julia(void *arg)
 	intmax_t	x;
 	intmax_t	y;
 	int			i;
-	long double deg;
+	double deg;
 	t_thrdata	*e;
 
 	e = (t_thrdata *)arg;
@@ -72,13 +72,13 @@ void			*julia(void *arg)
 
 void			julia_move(t_env *e, int x, int y)
 {
-	long double	jx;
-	long double	jy;
+	double	jx;
+	double	jy;
 
 	x -= e->x_win / 2;
 	y -= e->y_win / 2;
-	jx = ((long double)x / e->x_win) * 2;
-	jy = ((long double)y / e->y_win) * 2;
+	jx = ((double)x / e->x_win) * 2;
+	jy = ((double)y / e->y_win) * 2;
 	e->fra.julcr = jx;
 	e->fra.julci = jy;
 }

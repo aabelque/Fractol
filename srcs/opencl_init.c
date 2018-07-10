@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/09 18:15:28 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/10 19:08:18 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		create_kernel(cl_program program, cl_kernel *kernel, const char *func)
 	cl_int	err;
 	if (!(*kernel = clCreateKernel(program, func, &err)))
 	{
-		ft_putendl("Error: Fail to create kernel");
+		ft_putendl("Error: Failed to create kernel");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -69,14 +69,14 @@ void		create_prog(t_opencl *opcl)
 	if (!(opcl->program = clCreateProgramWithSource(opcl->context, 1,
 					(const char **)&opcl->kernel_src, NULL, &opcl->err)))
 	{
-		ft_putendl("Error: Fail to create program with source");
+		ft_putendl("Error: Failed to create program with source");
 		exit(EXIT_FAILURE);
 	}
 	cl_int	error;
 	error = clBuildProgram(opcl->program, 1, &opcl->device_id,
-				"-I./include", NULL, NULL);
+				NULL, NULL, NULL);
 	if (clBuildProgram(opcl->program, 1, &opcl->device_id,
-				"-I./include", NULL, NULL) != CL_SUCCESS)
+				NULL, NULL, NULL) != CL_SUCCESS)
 	{
 		char *errbuf;
 		cl_int coderr;
@@ -87,7 +87,7 @@ void		create_prog(t_opencl *opcl)
 		coderr = clGetProgramBuildInfo(opcl->program, opcl->device_id,
 				CL_PROGRAM_BUILD_LOG, errlog, errbuf, NULL);
 		fprintf(stderr,"Build log: \n%s\n", errbuf);
-		ft_putendl("Error: Fail to build program");
+		ft_putendl("Error: Failed to build program");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -96,34 +96,34 @@ void			opencl_init(t_opencl *opcl, t_env *e)
 {
 	if (clGetPlatformIDs(1, &opcl->platform_id, NULL) != CL_SUCCESS)
 	{
-		ft_putendl("Error: Fail to get a platformID");
+		ft_putendl("Error: Failed to get a platformID");
 		exit(EXIT_FAILURE);
 	}
 	if (clGetDeviceIDs(opcl->platform_id, opcl->dev_type, 1,
 			&opcl->device_id, &opcl->num_dev) != CL_SUCCESS)
 	{
-		ft_putendl("Error: Fail to create deviceID group");
+		ft_putendl("Error: Failed to create deviceID group");
 		exit(EXIT_FAILURE);
 	}
 	if (!(opcl->context = clCreateContext(0, 1, &opcl->device_id, NULL, NULL,
 			&opcl->err)))
 	{
-		ft_putendl("Error: Fail to create a context");
+		ft_putendl("Error: Failed to create a context");
 		exit(EXIT_FAILURE);
 	}
 	if (!(opcl->commands = clCreateCommandQueue(opcl->context, opcl->device_id,
 			0, &opcl->err)))
 	{
-		ft_putendl("Error: Fail to create command queue");
+		ft_putendl("Error: Failed to create command queue");
 		exit(EXIT_FAILURE);
 	}
+	(void)e;
 	opcl->img_s = X_WIN * Y_WIN;
 	opcl->bufhst = (int *)ft_memalloc(opcl->img_s * sizeof(int)); 
-//	opcl->input = clCreateBuffer(opcl->context, CL_MEM_WRITE_ONLY,
-//			sizeof(float), &e->fra.i_max, NULL);
+	opcl->input = clCreateBuffer(opcl->context, CL_MEM_READ_ONLY,
+			sizeof(t_fractal), NULL, NULL);
 	opcl->output = clCreateBuffer(opcl->context, CL_MEM_WRITE_ONLY,
 			sizeof(int) * opcl->img_s, NULL, NULL);
-	(void)e;
 	create_prog(opcl);
 	create_kernel(opcl->program, &opcl->kernel[0], "mandelbrot_gpu");
 //	create_kernel(opcl->program, opcl->kernel[1], "julia_gpu");
@@ -135,13 +135,15 @@ void			opencl_init(t_opencl *opcl, t_env *e)
 void			opencl_draw(t_opencl *opcl, t_env *e, double deg)
 {
 	size_t		i;
-	
+	t_fractal	*fra;
+
+	fra = &e->fra;
 	opcl->err = 0;
 	opcl->err |= clSetKernelArg(*opcl->kernel, 0, sizeof(cl_mem), &opcl->output);
-	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(int), &e->fra.i_max);
+	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(e->fra), &opcl->input);
 	opcl->err |= clSetKernelArg(*opcl->kernel, 2, sizeof(float), &deg);
-//	opcl->err = clEnqueueWriteBuffer(opcl->commands, opcl->input, CL_TRUE, 0,
-//			sizeof(e->fra.i_max), e, 0, NULL, NULL);
+	opcl->err = clEnqueueWriteBuffer(opcl->commands, opcl->input, CL_TRUE, 0,
+			sizeof(t_fractal), &e->fra, 0, NULL, NULL);
 	opcl->err = clEnqueueNDRangeKernel(opcl->commands, *opcl->kernel, 2, NULL,
 			opcl->imgxy, NULL, 0, NULL, NULL);
 	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->output, CL_TRUE, 0,

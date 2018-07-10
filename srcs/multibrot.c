@@ -6,25 +6,25 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 11:41:03 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/13 11:41:11 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/10 12:40:38 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 static	int		multibrot2(t_thrdata *e, intmax_t x, intmax_t y,
-		long double *deg)
+		double *deg)
 {
 	int			i;
-	long double	tmp;
-	long double	ztmp;
+	double	tmp;
+	double	ztmp;
 	t_cmplx		z;
 	t_cmplx		c;
 
 	i = -1;
 	z = (t_cmplx){0, 0};
-	c.r = (long double)x / e->fra->zoom + e->fra->x1;
-	c.i = (long double)y / e->fra->zoom + e->fra->y1;
+	c.r = (double)x / e->fra->zoom + e->fra->x1;
+	c.i = (double)y / e->fra->zoom + e->fra->y1;
 	while (++i < e->fra->i_max)
 	{
 		ztmp = z.r;
@@ -47,7 +47,7 @@ void			*multibrot(void *arg)
 	intmax_t	x;
 	intmax_t	y;
 	int			i;
-	long double deg;
+	double deg;
 	t_thrdata	*e;
 
 	e = (t_thrdata *)arg;

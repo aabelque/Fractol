@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/06/15 11:56:01 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/10 12:40:38 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			zoom_upk(t_env *e)
 {
-	long double sh;
+	double sh;
 
 	sh = (0.1 * (e->fra.x2 - e->fra.x1)) / 2;
 	e->fra.y1 += sh;
@@ -27,7 +27,7 @@ void			zoom_upk(t_env *e)
 
 void			zoom_dok(t_env *e)
 {
-	long double sh;
+	double sh;
 
 	sh = (0.1 * (e->fra.x2 - e->fra.x1)) / 2;
 	e->fra.y1 -= sh;

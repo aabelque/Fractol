@@ -1,6 +1,48 @@
-#include "kernel.h"
+typedef	struct		s_cmplx
+{
+	float			r;
+	float			i;
+}					t_cmplx;
 
-__kernel void mandelbrot_gpu(__global unsigned int *out, float imax, float deg)
+typedef	struct		s_fractal
+{
+	float			x1;
+	float			x2;
+	float			y1;
+	float			y2;
+	float			zoom;
+	float			julcr;
+	float			julci;
+	float			n;
+	float			x_win;
+	float			y_win;
+	float			size_tree;
+	float			size_tree2;
+	float			smth;
+	float			i_max2;
+	int				r;
+	int				g;
+	int				b;
+	int				i_max;
+	int				pad;
+}					t_fractal;
+
+typedef struct		s_env
+{
+	float		x_win;
+	float		y_win;
+	float		smth;
+	int				fractol;
+	int				mouse;
+	int				keybd;
+	int				keycol;
+	int				keyf;
+	int				it;
+	int				device;
+	t_fractal		fra;
+}					t_env;
+
+__kernel void mandelbrot_gpu(__global int *out, t_fractal e, float deg)
 {
 	int i;
 	int idx;
@@ -10,7 +52,6 @@ __kernel void mandelbrot_gpu(__global unsigned int *out, float imax, float deg)
 	t_cmplx	z;
 	float zoom;
 
-	imax = 50;
 	zoom = 1024 / (2.2 - (-2.6));
 	i = -1;
 	z.r = 0;
@@ -18,7 +59,7 @@ __kernel void mandelbrot_gpu(__global unsigned int *out, float imax, float deg)
 	c.r = get_global_id(0) / zoom + -2.6;
 	c.i = get_global_id(1) / zoom + -(((2.2 - -2.6) / 1024) * 720) / 2;
 	idx = get_global_size(0) * get_global_id(1) + get_global_id(0);
-	while (++i < imax)
+	while (++i < e.i_max)
 	{
 		ztmp = z.r;
 		z.r = z.r * z.r - z.i * z.i + c.r;

@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 11:48:25 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/09 19:01:07 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/10 12:48:07 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ int				key_press(t_env *e)
 		move_l(e);
 	if (e->keybd == 7)
 	{
-		(e->fractol != F_TREE) ? (e->fra.i_max += 2) : (e->fra.i_max2 += 0.1);
+		(e->fractol != F_TREE) ? (e->fra.i_max += 10) : (e->fra.i_max2 += 0.1);
 		(e->fractol != F_TREE) ? (void)e : (e->fra.zoom -= 0.01);
 	}
 	if (e->keybd == 8)
 	{
-		(e->fractol != F_TREE) ? (e->fra.i_max -= 2) : (e->fra.i_max2 -= 0.1);
+		(e->fractol != F_TREE) ? (e->fra.i_max -= 10) : (e->fra.i_max2 -= 0.1);
 		(e->fractol != F_TREE) ? (void)e : (e->fra.zoom += 0.01);
 	}
 	key_press2(e);
