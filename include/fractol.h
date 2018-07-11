@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 18:05:39 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 18:14:14 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ typedef	struct		s_ptfunc
 typedef struct		s_thrdata
 {
 	int				i_thr;
-	float			smth;
 	t_fractal		*fra;
 	t_img			*img;
 	t_ptfunc		*ptf;
@@ -185,7 +184,6 @@ typedef struct		s_env
 	int				device;
 	float			x_win;
 	float			y_win;
-	float			smth;
 	void			*(*func[F_MAX])(void *arg);
 	pthread_t		thread[NB_THR];
 	t_img			img;
