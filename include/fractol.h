@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 18:14:14 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 19:20:46 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef	struct		s_fractal
 	float			size_tree2;
 	float			i_max2;
 	float			smth;
+	float			deg;
 	int				r;
 	int				g;
 	int				b;
@@ -106,12 +107,14 @@ typedef	struct		s_opencl
 {
 	cl_device_type		dev_type;
 	float				deg;
+	cl_mem				deg2;
 	cl_int				err;
 	cl_uint				num_dev;
 	size_t				local;
 	size_t				img_s;
 	size_t				imgxy[2];
 	int					*bufhst;
+	float				bufdeg;
 	cl_mem				input;
 	cl_mem				output;
 	const char			*kernel_src;

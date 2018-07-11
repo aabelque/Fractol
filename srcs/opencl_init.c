@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 17:56:10 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 19:24:32 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void			opencl_init(t_opencl *opcl, t_env *e)
 			sizeof(t_fractal), NULL, NULL);
 	opcl->output = clCreateBuffer(opcl->context, CL_MEM_WRITE_ONLY,
 			sizeof(int) * opcl->img_s, NULL, NULL);
+//	opcl->deg2 = clCreateBuffer(opcl->context, CL_MEM_WRITE_ONLY,
+//			sizeof(float), NULL, NULL);
 	create_prog(opcl);
 	create_kernel(opcl->program, &opcl->kernel[0], "mandelbrot_gpu");
 //	create_kernel(opcl->program, opcl->kernel[1], "julia_gpu");
@@ -142,13 +144,17 @@ void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
 			sizeof(t_fractal), (void *)&e->fra, 0, NULL, NULL);
 	opcl->err |= clSetKernelArg(*opcl->kernel, 0, sizeof(cl_mem), &opcl->output);
 	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(cl_mem), &opcl->input);
-	opcl->err |= clSetKernelArg(*opcl->kernel, 2, sizeof(float), &deg);
+//	opcl->err |= clSetKernelArg(*opcl->kernel, 2, sizeof(cl_mem), &opcl->deg);
 	opcl->err = clEnqueueNDRangeKernel(opcl->commands, *opcl->kernel, 2, NULL,
 			opcl->imgxy, NULL, 0, NULL, NULL);
+//	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->deg2, CL_TRUE, 0,
+//			sizeof(float), &opcl->bufdeg, 0, NULL, NULL);
 	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->output, CL_TRUE, 0,
-			sizeof(int) * opcl->img_s, opcl->bufhst, 0, NULL, NULL);
+			sizeof(int) * opcl->img_s, e->img.addr, 0, NULL, NULL);
 	i = 0;
-	while (i < opcl->img_s)
+	(void)deg;
+//	deg = opcl->bufdeg;
+/*	while (i < opcl->img_s)
 	{
 		e->it = opcl->bufhst[i];
 //		((int *)e->img.addr)[i] = opcl->bufhst[i];
@@ -161,5 +167,5 @@ void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
 						e->ptf.ptcol3(), (((float)e->it + (1 - deg))
 							/ ((float)e->fra.i_max))));
 		i++;
-	}
+	}*/
 }

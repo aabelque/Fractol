@@ -18,6 +18,7 @@ typedef	struct		s_fractal
 	float			size_tree2;
 	float			i_max2;
 	float			smth;
+	float			deg;
 	int				r;
 	int				g;
 	int				b;
@@ -39,12 +40,14 @@ typedef struct		s_env
 	t_fractal		fra;
 }					t_env;
 
-__kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e, float deg)
+__kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e)
 {
 	int i;
 	int idx;
 	float tmp;
-	float	ztmp;
+	float ztmp;
+	float deg;
+	uchar4	col;
 	t_cmplx	c;
 	t_cmplx	z;
 
