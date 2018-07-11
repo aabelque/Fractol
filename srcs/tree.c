@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/11 15:54:26 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/10 12:40:38 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:53:38 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static	void	put_tree(t_env *e, t_tree start, t_tree end, int color)
 {
-	double	dd;
-	double	x;
-	double	y;
-	double	dx;
-	double	dy;
+	float	dd;
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
 
 	x = start.x;
 	y = start.y;
@@ -35,7 +35,7 @@ static	void	put_tree(t_env *e, t_tree start, t_tree end, int color)
 	}
 }
 
-void			tree(t_env *e, t_tree start, double angle, int iter)
+void			tree(t_env *e, t_tree start, float angle, int iter)
 {
 	t_tree		end;
 	int			color;
@@ -65,6 +65,6 @@ void			send_tree(t_env *e, int iter)
 void			tree_move(t_env *e, int x, int y)
 {
 	(void)y;
-	e->fra.size_tree2 = (double)x / X_WIN;
-	e->fra.size_tree = (double)y / Y_WIN - e->fra.size_tree2;
+	e->fra.size_tree2 = (float)x / X_WIN;
+	e->fra.size_tree = (float)y / Y_WIN - e->fra.size_tree2;
 }

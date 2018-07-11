@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 10:11:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/10 12:40:38 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:54:04 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_color			color_y(void)
 	return (yel);
 }
 
-t_color			interpol_color(t_color a, t_color b, double i)
+t_color			interpol_color(t_color a, t_color b, float i)
 {
 	t_color		new_color;
 
@@ -42,7 +42,7 @@ t_color			interpol_color(t_color a, t_color b, double i)
 	return (new_color);
 }
 
-t_color			interpol_color2(t_color a, t_color b, t_color c, double i)
+t_color			interpol_color2(t_color a, t_color b, t_color c, float i)
 {
 	t_color		new_color;
 

@@ -14,17 +14,13 @@ typedef	struct		s_fractal
 	float			julcr;
 	float			julci;
 	float			n;
-	float			x_win;
-	float			y_win;
 	float			size_tree;
 	float			size_tree2;
-	float			smth;
 	float			i_max2;
 	int				r;
 	int				g;
 	int				b;
 	int				i_max;
-	int				pad;
 }					t_fractal;
 
 typedef struct		s_env
@@ -42,7 +38,7 @@ typedef struct		s_env
 	t_fractal		fra;
 }					t_env;
 
-__kernel void mandelbrot_gpu(__global int *out, t_fractal e, float deg)
+__kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e, float deg)
 {
 	int i;
 	int idx;
@@ -56,10 +52,10 @@ __kernel void mandelbrot_gpu(__global int *out, t_fractal e, float deg)
 	i = -1;
 	z.r = 0;
 	z.i = 0;
-	c.r = get_global_id(0) / zoom + -2.6;
-	c.i = get_global_id(1) / zoom + -(((2.2 - -2.6) / 1024) * 720) / 2;
+	c.r = get_global_id(0) / e->zoom + e->x1;
+	c.i = get_global_id(1) / e->zoom + e->y1;
 	idx = get_global_size(0) * get_global_id(1) + get_global_id(0);
-	while (++i < e.i_max)
+	while (++i < e->i_max)
 	{
 		ztmp = z.r;
 		z.r = z.r * z.r - z.i * z.i + c.r;

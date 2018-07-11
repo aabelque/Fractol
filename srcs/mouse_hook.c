@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 16:02:06 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/10 13:13:08 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:53:38 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static void		zoom_upm(t_env *e, int x, int y)
 {
-	double	p;
-	double	sh;
+	float	p;
+	float	sh;
 
 	sh = (0.1 * (e->fra.y2 - e->fra.y1)) / 2;
-	p = (double)y / (double)Y_WIN;
+	p = (float)y / (float)Y_WIN;
 	e->fra.y1 += sh * p;
 	e->fra.y2 -= sh * (1 - p);
 	sh = (0.1 * (e->fra.x2 - e->fra.x1)) / 2;
-	p = (double)x / (double)X_WIN;
+	p = (float)x / (float)X_WIN;
 	e->fra.x1 += sh * p;
 	e->fra.x2 -= sh * (1 - p);
 	e->fra.zoom = e->x_win / (e->fra.x2 - e->fra.x1);
@@ -30,15 +30,15 @@ static void		zoom_upm(t_env *e, int x, int y)
 
 static void		zoom_dom(t_env *e, int x, int y)
 {
-	double	p;
-	double	sh;
+	float	p;
+	float	sh;
 
 	sh = (0.1 * (e->fra.y2 - e->fra.y1)) / 2;
-	p = (double)y / (double)Y_WIN;
+	p = (float)y / (float)Y_WIN;
 	e->fra.y1 -= sh * p;
 	e->fra.y2 += sh * (1 - p);
 	sh = (0.1 * (e->fra.x2 - e->fra.x1)) / 2;
-	p = (double)x / (double)X_WIN;
+	p = (float)x / (float)X_WIN;
 	e->fra.x1 -= sh * p;
 	e->fra.x2 += sh * (1 - p);
 	e->fra.zoom = e->x_win / (e->fra.x2 - e->fra.x1);

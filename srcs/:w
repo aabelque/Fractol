@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 17:56:10 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:08:02 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,8 @@ void		create_prog(t_opencl *opcl)
 		errbuf = ft_memalloc(sizeof(errlog));
 		coderr = clGetProgramBuildInfo(opcl->program, opcl->device_id,
 				CL_PROGRAM_BUILD_LOG, errlog, errbuf, NULL);
-//		fprintf(stderr,"Build log: \n%s\n", errbuf);
+		fprintf(stderr,"Build log: \n%s\n", errbuf);
 		ft_putendl("Error: Failed to build program");
-		ft_putendl(errbuf);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -133,16 +132,16 @@ void			opencl_init(t_opencl *opcl, t_env *e)
 
 }
 
-void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
+void			opencl_draw(t_opencl *opcl, t_env *e, double deg)
 {
 	size_t		i;
 
 	opcl->err = 0;
-	opcl->err = clEnqueueWriteBuffer(opcl->commands, opcl->input, CL_TRUE, 0,
-			sizeof(t_fractal), (void *)&e->fra, 0, NULL, NULL);
 	opcl->err |= clSetKernelArg(*opcl->kernel, 0, sizeof(cl_mem), &opcl->output);
-	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(cl_mem), &opcl->input);
-	opcl->err |= clSetKernelArg(*opcl->kernel, 2, sizeof(float), &deg);
+//	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(e->fra), &opcl->input);
+	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(float), &deg);
+	opcl->err = clEnqueueWriteBuffer(opcl->commands, opcl->input, CL_TRUE, 0,
+			sizeof(t_fractal), &e->fra, 0, NULL, NULL);
 	opcl->err = clEnqueueNDRangeKernel(opcl->commands, *opcl->kernel, 2, NULL,
 			opcl->imgxy, NULL, 0, NULL, NULL);
 	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->output, CL_TRUE, 0,
@@ -153,13 +152,13 @@ void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
 		e->it = opcl->bufhst[i];
 //		((int *)e->img.addr)[i] = opcl->bufhst[i];
 		//set_pxl2(e->img, i % X_WIN, i / X_WIN, e->it);
-		if (e->it >= e->fra.i_max)
+		if (e->it >= 50)
 			set_pxl(&e->img, i % X_WIN, i / X_WIN, e->ptf.ptcol4());
 		else
 			set_pxl(&e->img, i % X_WIN, i / X_WIN, interpol_color2(e->ptf.ptcol1(),
 						e->ptf.ptcol2(),
-						e->ptf.ptcol3(), (((float)e->it + (1 - deg))
-							/ ((float)e->fra.i_max))));
+						e->ptf.ptcol3(), (((double)e->it + (1 - deg))
+							/ ((double)e->fra.i_max))));
 		i++;
 	}
 }

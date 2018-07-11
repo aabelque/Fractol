@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 17:34:01 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/10 12:40:38 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:53:38 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			move_up(t_env *e)
 {
-	double	sh;
+	float	sh;
 
 	sh = 0.05 * (e->fra.x2 - e->fra.x1);
 	e->fra.y1 += sh;
@@ -23,7 +23,7 @@ void			move_up(t_env *e)
 
 void			move_do(t_env *e)
 {
-	double	sh;
+	float	sh;
 
 	sh = 0.05 * (e->fra.x2 - e->fra.x1);
 	e->fra.y1 -= sh;
@@ -32,7 +32,7 @@ void			move_do(t_env *e)
 
 void			move_r(t_env *e)
 {
-	double	sh;
+	float	sh;
 
 	sh = 0.05 * (e->fra.x2 - e->fra.x1);
 	e->fra.x1 -= sh;
@@ -41,7 +41,7 @@ void			move_r(t_env *e)
 
 void			move_l(t_env *e)
 {
-	double	sh;
+	float	sh;
 
 	sh = 0.05 * (e->fra.x2 - e->fra.x1);
 	e->fra.x1 += sh;
