@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 11:48:25 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 11:39:46 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 18:10:57 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int				key_hook3(int keycode, t_env *e)
 {
 	if (keycode == K_C0)
 	{
-		if (e->smth == 5000.0 && e->fractol != F_MULTI)
-			e->smth = 2.0;
-		else if (e->smth == 5000.0 && e->fractol == F_MULTI)
-			e->smth = e->fra.n;
+		if (e->fra.smth == 5000.0 && e->fractol != F_MULTI)
+			e->fra.smth = 2.0;
+		else if (e->fra.smth == 5000.0 && e->fractol == F_MULTI)
+			e->fra.smth = e->fra.n;
 		else
-			e->smth = 5000.0;
+			e->fra.smth = 5000.0;
 	}
 	if (keycode == K_C7)
 	{
@@ -86,12 +86,12 @@ int				key_press(t_env *e)
 		move_l(e);
 	if (e->keybd == 7)
 	{
-		(e->fractol != F_TREE) ? (e->fra.i_max += 10) : (e->fra.i_max2 += 0.1);
+		(e->fractol != F_TREE) ? (e->fra.i_max += 2) : (e->fra.i_max2 += 0.1);
 		(e->fractol != F_TREE) ? (void)e : (e->fra.zoom -= 0.01);
 	}
 	if (e->keybd == 8)
 	{
-		(e->fractol != F_TREE) ? (e->fra.i_max -= 10) : (e->fra.i_max2 -= 0.1);
+		(e->fractol != F_TREE) ? (e->fra.i_max -= 2) : (e->fra.i_max2 -= 0.1);
 		(e->fractol != F_TREE) ? (void)e : (e->fra.zoom += 0.01);
 	}
 	key_press2(e);

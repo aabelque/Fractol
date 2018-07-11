@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 17:53:38 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 18:05:39 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef	struct		s_fractal
 	float			size_tree;
 	float			size_tree2;
 	float			i_max2;
+	float			smth;
 	int				r;
 	int				g;
 	int				b;

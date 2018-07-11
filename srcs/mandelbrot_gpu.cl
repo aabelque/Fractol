@@ -17,6 +17,7 @@ typedef	struct		s_fractal
 	float			size_tree;
 	float			size_tree2;
 	float			i_max2;
+	float			smth;
 	int				r;
 	int				g;
 	int				b;
@@ -63,7 +64,7 @@ __kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e, float deg
 		tmp = log(z.r * z.r + z.i * z.i) / 2.0f;
 		if (tmp >= 4)
 		{
-			deg = log(tmp / log(2.)) / log(2.);
+			deg = log(tmp / log(e->smth)) / log(e->smth);
 			out[idx] = i;
 			return;
 		}

@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 16:36:59 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/10 12:40:38 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 18:07:31 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static	int		burningship2(t_thrdata *e, intmax_t x, intmax_t y,
 		tmp = log(z.r * z.r + z.i * z.i) / 2.0f;
 		if (tmp >= 4)
 		{
-			*deg = log(tmp / log((e->smth))) / log(e->smth);
+			*deg = log(tmp / log((e->fra->smth))) / log(e->fra->smth);
 			return (i);
 		}
 	}

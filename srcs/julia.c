@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 06:02:48 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 17:53:38 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/11 18:06:47 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	int		julia2(t_thrdata *e, intmax_t x, intmax_t y,
 		tmp = log(z.r * z.r + z.i * z.i) / 2.0f;
 		if (tmp >= 4)
 		{
-			*deg = log(tmp / log(e->smth)) / log(e->smth);
+			*deg = log(tmp / log(e->fra->smth)) / log(e->fra->smth);
 			return (i);
 		}
 	}
