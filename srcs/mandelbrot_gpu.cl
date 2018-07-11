@@ -47,9 +47,7 @@ __kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e, float deg
 	float	ztmp;
 	t_cmplx	c;
 	t_cmplx	z;
-	float zoom;
 
-	zoom = 1024 / (2.2 - (-2.6));
 	i = -1;
 	z.r = 0;
 	z.i = 0;
