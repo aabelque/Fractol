@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 19:24:32 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/12 00:10:17 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,11 +150,11 @@ void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
 //	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->deg2, CL_TRUE, 0,
 //			sizeof(float), &opcl->bufdeg, 0, NULL, NULL);
 	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->output, CL_TRUE, 0,
-			sizeof(int) * opcl->img_s, e->img.addr, 0, NULL, NULL);
+			sizeof(int) * opcl->img_s, opcl->bufhst, 0, NULL, NULL);
 	i = 0;
 	(void)deg;
 //	deg = opcl->bufdeg;
-/*	while (i < opcl->img_s)
+	while (i < opcl->img_s)
 	{
 		e->it = opcl->bufhst[i];
 //		((int *)e->img.addr)[i] = opcl->bufhst[i];
@@ -167,5 +167,5 @@ void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
 						e->ptf.ptcol3(), (((float)e->it + (1 - deg))
 							/ ((float)e->fra.i_max))));
 		i++;
-	}*/
+	}
 }

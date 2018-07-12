@@ -6,26 +6,26 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 16:36:59 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 18:07:31 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/12 10:47:33 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 static	int		burningship2(t_thrdata *e, intmax_t x, intmax_t y,
-		double *deg)
+		float *deg)
 {
 	int			i;
-	double	tmp;
-	double	ztmp;
+	float		tmp;
+	float		ztmp;
 	t_cmplx		z;
 	t_cmplx		c;
 
 	i = -1;
 	z.r = 0;
 	z.i = 0;
-	c.r = (double)x / e->fra->zoom + e->fra->x1;
-	c.i = (double)y / e->fra->zoom + e->fra->y1;
+	c.r = (float)x / e->fra->zoom + e->fra->x1;
+	c.i = (float)y / e->fra->zoom + e->fra->y1;
 	while (++i < e->fra->i_max)
 	{
 		ztmp = z.r;
@@ -47,7 +47,7 @@ void			*burningship(void *arg)
 	intmax_t	x;
 	intmax_t	y;
 	int			i;
-	double	deg;
+	float		deg;
 	t_thrdata	*e;
 
 	e = (t_thrdata *)arg;
@@ -63,8 +63,8 @@ void			*burningship(void *arg)
 			else
 				set_pxl(e->img, x, y, interpol_color2(e->ptf->ptcol1(),
 							e->ptf->ptcol2(),
-							e->ptf->ptcol3(), (((double)i + (1 - deg))
-								/ ((double)e->fra->i_max))));
+							e->ptf->ptcol3(), (((float)i + (1 - deg))
+								/ ((float)e->fra->i_max))));
 		}
 		x += NB_THR;
 	}

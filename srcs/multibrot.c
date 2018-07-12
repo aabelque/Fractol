@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 11:41:03 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 19:20:46 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/12 10:48:36 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static	int		multibrot2(t_thrdata *e, intmax_t x, intmax_t y,
 		float *deg)
 {
 	int			i;
-	float	tmp;
-	float	ztmp;
+	float		tmp;
+	float		ztmp;
 	t_cmplx		z;
 	t_cmplx		c;
 
@@ -47,7 +47,7 @@ void			*multibrot(void *arg)
 	intmax_t	x;
 	intmax_t	y;
 	int			i;
-	float deg;
+	float		deg;
 	t_thrdata	*e;
 
 	e = (t_thrdata *)arg;
