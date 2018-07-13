@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:18:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/09 16:26:07 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/12 19:10:43 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ int				main(int ac, char **av)
 		ft_usage();
 		exit(EXIT_FAILURE);
 	}
-	m_help(e);
 	init_color(e);
 	init_mlx(e);
+	m_help(e);
 	display_ctrl();
 	mlx_loop(e->mlx);
 	return (0);

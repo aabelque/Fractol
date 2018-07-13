@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/07/09 18:43:45 by aabelque         ###   ########.fr        #
+#    Updated: 2018/07/12 11:32:17 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,6 @@ OBJS = $(SRC:%.c=%.o)
 	INCDIR = include/
 	INCFILE = fractol.h
 	INC = $(addprefix $(INCDIR), $(INCFILE))
-
-OBJCU = $(CUSRC:%.cu=%.o)
 
 LIBPATH = libs/
 

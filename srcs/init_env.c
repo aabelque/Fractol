@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 15:25:46 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 19:20:46 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/13 15:03:56 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			init_env(t_env *e)
 {
-	float	p;
+	double	p;
 
 	init_color(e);
 	e->x_win = X_WIN;
@@ -33,7 +33,7 @@ void			init_env(t_env *e)
 
 void			init_env2(t_env *e, float x, float y)
 {
-	float	p;
+	double	p;
 
 	e->x_win = X_WIN;
 	e->y_win = Y_WIN;
@@ -53,7 +53,7 @@ void			init_env2(t_env *e, float x, float y)
 
 void			init_env3(t_env *e)
 {
-	float	p;
+	double	p;
 
 	e->x_win = X_WIN;
 	e->y_win = Y_WIN;

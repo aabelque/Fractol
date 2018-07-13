@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 23:30:20 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/13 15:02:10 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ typedef	struct		s_opencl
 {
 	cl_device_type		dev_type;
 	float				deg;
-	cl_mem				deg2;
 	cl_int				err;
 	cl_uint				num_dev;
 	size_t				local;
