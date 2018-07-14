@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/13 14:56:45 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/14 08:35:32 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void		create_prog(t_opencl *opcl)
 	}
 	cl_int	error;
 	error = clBuildProgram(opcl->program, 1, &opcl->device_id,
-				NULL, NULL, NULL);
+				"-I./include", NULL, NULL);
 	if (clBuildProgram(opcl->program, 1, &opcl->device_id,
-				NULL, NULL, NULL) != CL_SUCCESS)
+				"-I./include", NULL, NULL) != CL_SUCCESS)
 	{
 		char *errbuf;
 		cl_int coderr;

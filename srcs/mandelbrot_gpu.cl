@@ -1,39 +1,5 @@
+#include "kernel.h"
 int		ft_color(uchar4 a, uchar4 b, uchar4 c, float i);
-typedef struct		s_color
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}					t_color;
-
-typedef	struct		s_cmplx
-{
-	float			r;
-	float			i;
-}					t_cmplx;
-
-typedef	struct		s_fractal
-{
-	float			x1;
-	float			x2;
-	float			y1;
-	float			y2;
-	float			zoom;
-	float			julcr;
-	float			julci;
-	float			n;
-	float			size_tree;
-	float			size_tree2;
-	float			i_max2;
-	float			smth;
-	float			deg;
-	int				r;
-	int				g;
-	int				b;
-	int				i_max;
-}					t_fractal;
-
 int		ft_color(uchar4 a, uchar4 b, uchar4 c, float i)
 {
 	uchar4 new;
@@ -72,9 +38,9 @@ __kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e)
 	uchar4 b;
 	uchar4 d;
 
-	a = (uchar4)(255, 0, 0, 1);
-	b = (uchar4)(0, 0, 255, 1);
-	d = (uchar4)(255, 255, 255, 1);
+	a = (uchar4)(255, 0, 0, 0);
+	b = (uchar4)(0, 0, 255, 0);
+	d = (uchar4)(200, 200, 200, 0);
 	i = -1;
 	z.r = 0;
 	z.i = 0;
@@ -89,7 +55,7 @@ __kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e)
 		tmp = log(z.r * z.r + z.i * z.i) / 2.0f;
 		if (tmp >= 4)
 		{
-			deg = log(tmp / log(e->smth)) / log(e->smth);
+			deg += log(tmp / log(e->smth)) / log(e->smth);
 			out[idx] = ft_color(b, d, a, (((float)i + (1 - deg)) / e->i_max));
 			return;
 		}
