@@ -1,12 +1,18 @@
 #include "kernel.h"
+
 int		ft_color(uchar4 a, uchar4 b, uchar4 c, float i);
+int		ft_colors(int clr1, int clr2, double val);
+
 int		ft_color(uchar4 a, uchar4 b, uchar4 c, float i)
 {
 	uchar4 new;
 	int	newc;
 
 	newc = 0;
-	i = fmax(i, 0);
+	if (i > 1.0)
+		i = 1.0;
+	else if (i < 0.0)
+		i = 0.0;
 	if (i <= 0.5)
 	{
 		new.r = a.r + (b.r - a.r) * i;
@@ -25,6 +31,24 @@ int		ft_color(uchar4 a, uchar4 b, uchar4 c, float i)
 	return (newc);
 }
 
+int			ft_colors(int clr1, int clr2, double val)
+{
+	int		r;
+	int		g;
+	int		b;
+
+	if (val > 1.0)
+		val = 1.0;
+	else if (val < 0.0)
+		val = 0.0;
+	r = floor((double)((clr1 >> 16) & 0xFF)
+	- (((double)((clr1 >> 16) & 0xFF) - (double)((clr2 >> 16) & 0xFF)) * val));
+	g = floor((double)((clr1 >> 8) & 0xFF)
+	- (((double)((clr1 >> 8) & 0xFF) - (double)((clr2 >> 8) & 0xFF)) * val));
+	b = floor((double)((clr1) & 0xFF) - (((double)((clr1) & 0xFF) \
+		- (double)((clr2) & 0xFF)) * val));
+	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
+}
 __kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e)
 {
 	int i;
@@ -55,8 +79,10 @@ __kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e)
 		tmp = log(z.r * z.r + z.i * z.i) / 2.0f;
 		if (tmp >= 4)
 		{
-			deg += log(tmp / log(e->smth)) / log(e->smth);
-			out[idx] = ft_color(b, d, a, (((float)i + (1 - deg)) / e->i_max));
+			deg = log(tmp / log(e->smth)) / log(e->smth);
+			//out[idx] = ft_color(b, d, a, (((float)i + (1 - deg)) / e->i_max));
+			out[idx] = ft_colors(0x000000, 0x88ff88, (((float)i + (1 - deg)) / e->i_max));
+			//out[idx] = i;
 			return;
 		}
 	}

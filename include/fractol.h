@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/13 15:02:10 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/14 16:34:42 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "mlx.h"
 # include <stdlib.h>
 # include <math.h>
+# include <sys/stat.h>
 # include <pthread.h>
 
 # ifdef __APPLE__
@@ -116,7 +117,8 @@ typedef	struct		s_opencl
 	float				bufdeg;
 	cl_mem				input;
 	cl_mem				output;
-	const char			*kernel_src;
+	cl_mem				col;
+	char				*kernel_src;
 	cl_platform_id		platform_id;
 	cl_device_id		device_id;
 	cl_context			context;
@@ -198,6 +200,7 @@ void				opencl_init(t_opencl *opcl, t_env *e);
 void				opencl_draw(t_opencl *opcl, t_env *e, float deg);
 void				set_opencl_env(t_opencl *opcl);
 void				create_prog(t_opencl *opcl);
+char				*get_kernel_source(char *file);
 void				create_kernel(cl_program program, cl_kernel *kernel,
 		const char *func);
 void				send_tree(t_env *e, int iter);
@@ -253,6 +256,7 @@ void				*julia(void *arg);
 void				ft_error(char *str);
 void				ft_malloc_error(t_env *e);
 void				ft_usage(void);
+//void				init_color_gpu(t_fractal c);
 int					init_mlx(t_env *e);
 int					loop_hook(t_env *e);
 int					parsing_arg(char *str, char *s, t_env *e);

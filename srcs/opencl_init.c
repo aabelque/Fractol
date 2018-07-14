@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/14 08:35:32 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/14 16:31:44 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,31 @@ void		create_kernel(cl_program program, cl_kernel *kernel, const char *func)
 	}
 }
 
+char		*get_kernel_source(char *file)
+{
+	char	*kernel_src;
+	struct stat		stats;
+	int				fd;
+
+	if (lstat(file, &stats) == -1)
+	{
+		ft_putendl("Error: kernel source not found");
+		exit(EXIT_FAILURE);
+	}
+	if (!(fd = open(file, O_RDONLY)))
+	{
+		ft_putendl("Error: fail to load kernel source");
+		exit(EXIT_FAILURE);
+	}
+	kernel_src = ft_memalloc(stats.st_size);
+	read(fd, kernel_src, stats.st_size);
+	close(fd);
+	return (kernel_src);
+}
+
 void		create_prog(t_opencl *opcl)
 {
-	int		fd;
-	int		ret;
-	char	*tmp;
-	char	buf[BUFF_SIZE + 1];
-
-	tmp = NULL;
-	fd = open("srcs/mandelbrot_gpu.cl", O_RDONLY);
-	while ((ret = read(fd, buf, BUFF_SIZE)) != 0)
-	{
-		if (ret < 0 || fd < 0)
-			exit(0);
-		if (tmp == NULL)
-		{
-			tmp = ft_strnew(ft_strlen(buf));
-			tmp = buf;
-		}
-		else
-		{
-			tmp = ft_strjoin(opcl->kernel_src, buf);
-			free((char *)opcl->kernel_src);
-		}
-		opcl->kernel_src = tmp;
-	}
-	close(fd);
+	opcl->kernel_src = get_kernel_source("srcs/mandelbrot_gpu.cl"); 
 	if (!(opcl->program = clCreateProgramWithSource(opcl->context, 1,
 					(const char **)&opcl->kernel_src, NULL, &opcl->err)))
 	{
@@ -91,6 +90,7 @@ void		create_prog(t_opencl *opcl)
 		ft_putendl(errbuf);
 		exit(EXIT_FAILURE);
 	}
+	free((void *)opcl->kernel_src);
 }
 
 void			opencl_init(t_opencl *opcl, t_env *e)
@@ -142,7 +142,6 @@ void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
 			sizeof(t_fractal), (void *)&e->fra, 0, NULL, NULL);
 	opcl->err |= clSetKernelArg(*opcl->kernel, 0, sizeof(cl_mem), &opcl->output);
 	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(cl_mem), &opcl->input);
-//	opcl->err |= clSetKernelArg(*opcl->kernel, 2, sizeof(cl_mem), &opcl->deg);
 	opcl->err = clEnqueueNDRangeKernel(opcl->commands, *opcl->kernel, 2, NULL,
 			opcl->imgxy, NULL, 0, NULL, NULL);
 //	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->deg2, CL_TRUE, 0,
@@ -152,7 +151,7 @@ void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
 	i = 0;
 	(void)deg;
 //	deg = opcl->bufdeg;
-/*	while (i < opcl->img_s)
+	/*while (i < opcl->img_s)
 	{
 		e->it = opcl->bufhst[i];
 //		((int *)e->img.addr)[i] = opcl->bufhst[i];
@@ -160,10 +159,11 @@ void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
 		if (e->it >= e->fra.i_max)
 			set_pxl(&e->img, i % X_WIN, i / X_WIN, e->ptf.ptcol4());
 		else
-			set_pxl(&e->img, i % X_WIN, i / X_WIN, interpol_color2(e->ptf.ptcol1(),
-						e->ptf.ptcol2(),
-						e->ptf.ptcol3(), (((float)e->it + (1 - deg))
-							/ ((float)e->fra.i_max))));
+			//set_pxl2(e->img, i % X_WIN, i / X_WIN, (e->it + e->fra.color[0][0]));
+			//set_pxl(&e->img, i % X_WIN, i / X_WIN, interpol_color2(e->ptf.ptcol1(),
+			//			e->ptf.ptcol2(),
+			//			e->ptf.ptcol3(), (((float)e->it + (1 - deg))
+			//				/ ((float)e->fra.i_max))));
 		i++;
 	}*/
 }
