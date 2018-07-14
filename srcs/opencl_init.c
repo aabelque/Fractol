@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/14 16:31:44 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/14 17:44:51 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char		*get_kernel_source(char *file)
 	struct stat		stats;
 	int				fd;
 
-	if (lstat(file, &stats) == -1)
+	if (stat(file, &stats) == -1)
 	{
 		ft_putendl("Error: kernel source not found");
 		exit(EXIT_FAILURE);
@@ -85,7 +85,6 @@ void		create_prog(t_opencl *opcl)
 		errbuf = ft_memalloc(sizeof(errlog));
 		coderr = clGetProgramBuildInfo(opcl->program, opcl->device_id,
 				CL_PROGRAM_BUILD_LOG, errlog, errbuf, NULL);
-//		fprintf(stderr,"Build log: \n%s\n", errbuf);
 		ft_putendl("Error: Failed to build program");
 		ft_putendl(errbuf);
 		exit(EXIT_FAILURE);
