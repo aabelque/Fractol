@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/14 16:34:42 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/15 14:35:49 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ enum				e_key
 	K_C6,
 	K_C7 = 26,
 	K_X = 7,
+	K_CC,
+	K_W = 13,
+	K_A = 0,
+	K_S,
+	K_D,
 	K_F16 = 106,
 	K_LEFT = 123,
 	K_RIGHT,
@@ -98,9 +103,20 @@ typedef	struct		s_fractal
 	float			i_max2;
 	float			smth;
 	float			deg;
+	float			r_freq;
+	float			g_freq;
+	float			b_freq;
+	float			r_ph;
+	float			g_ph;
+	float			b_ph;
+	int				clr;
+	int				clr2;
+	int				col_style;
+	int				psych;
 	int				r;
 	int				g;
 	int				b;
+	int				sc;
 	int				i_max;
 }					t_fractal;
 
@@ -196,6 +212,12 @@ typedef struct		s_env
 	t_opencl		opcl;
 }					t_env;
 
+void				setup_col(t_fractal *c);
+void				col_pal(t_fractal *c);
+void				color_random(t_fractal *c);
+void				psych_col_rand(t_fractal *c);
+int					ch_col(t_fractal *c, float iter);
+int					col_hook(t_fractal *c);
 void				opencl_init(t_opencl *opcl, t_env *e);
 void				opencl_draw(t_opencl *opcl, t_env *e, float deg);
 void				set_opencl_env(t_opencl *opcl);

@@ -6,12 +6,27 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 11:48:25 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/14 16:34:34 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/15 16:00:56 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
+
+static	int		key_hook4(int keycode, t_env *e)
+{
+	if (keycode == K_W)
+		e->fra.sc = (e->fra.sc == 0 ? 1 : 0);
+	if (keycode == K_D)
+		e->fra.psych = (e->fra.psych == 0 ? 1 : 0);
+	if (keycode == K_A)
+		col_pal(&e->fra);
+	if (keycode == K_CC)
+		color_random(&e->fra);
+	if (keycode == K_S)
+		psych_col_rand(&e->fra);
+	return (0);
+}
 
 int				key_hook3(int keycode, t_env *e)
 {
@@ -29,6 +44,7 @@ int				key_hook3(int keycode, t_env *e)
 		e->fractol = F_TRI;
 		init_env(e);
 	}
+	key_hook4(keycode, e);
 	return (0);
 }
 

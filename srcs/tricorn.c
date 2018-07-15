@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 15:30:59 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/12 10:48:12 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/15 14:26:02 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ static	int		tricorn2(t_thrdata *e, intmax_t x, intmax_t y,
 	return (i);
 }
 
+static t_color	tri_help(t_thrdata *e, float deg, int i)
+{
+	return (interpol_color2(e->ptf->ptcol1(), e->ptf->ptcol2(),
+				e->ptf->ptcol3(), (((float)i + (1 - deg))
+					/ ((float)e->fra->i_max))));
+}
+
 void			*tricorn(void *arg)
 {
 	intmax_t	x;
@@ -60,10 +67,10 @@ void			*tricorn(void *arg)
 			if (i >= e->fra->i_max)
 				set_pxl(e->img, x, y, e->ptf->ptcol4());
 			else
-				set_pxl(e->img, x, y, interpol_color2(e->ptf->ptcol1(),
-							e->ptf->ptcol2(),
-							e->ptf->ptcol3(), (((float)i + (1 - deg))
-								/ ((float)e->fra->i_max))));
+			{
+				(e->fra->sc == 1) ? set_pxl2(*e->img, x, y, ch_col(e->fra, deg))
+					: set_pxl(e->img, x, y, tri_help(e, deg, i));
+			}
 		}
 		x += NB_THR;
 	}

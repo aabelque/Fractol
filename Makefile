@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/07/14 16:33:03 by aabelque         ###   ########.fr        #
+#    Updated: 2018/07/15 12:50:28 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ SRC = srcs/main.c \
 	  srcs/mandelbrot.c \
 	  srcs/multibrot.c \
 	  srcs/clean.c \
+	  srcs/col.c \
+	  srcs/col_hook.c \
 	  srcs/init_env.c \
 	  srcs/draw.c \
 	  srcs/tree.c \

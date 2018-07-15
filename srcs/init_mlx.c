@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 11:40:00 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/15 14:13:15 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ static	int		loop_hook_help(t_env *e)
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 20, 0xffffff,
 				"Color: Num Keypad 1 -> 6");
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 39, 0xffffff,
-				"Smooth color: Num Keypad 0");
+				"Color psych: W, A, S, D, C");
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 58, 0xffffff,
-				"Iteration: I, U");
+				"Smooth color: Num Keypad 0");
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 77, 0xffffff,
-				"Multibrot: Change Form P, O");
+				"Iteration: I, U");
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 96, 0xffffff,
-				"Zoom: +, -, mouse scroll");
+				"Multibrot: Change Form P, O");
 		mlx_string_put(e->mlx, e->win, X_WIN - 300, 115, 0xffffff,
+				"Zoom: +, -, mouse scroll");
+		mlx_string_put(e->mlx, e->win, X_WIN - 300, 134, 0xffffff,
 				"Move: Arrow");
 	}
 	return (0);
@@ -63,6 +65,7 @@ int				loop_hook(t_env *e)
 		ft_error("fail to put image");
 	mlx_string_put(e->mlx, e->win, X_WIN - X_WIN, 1, 0xffffff,
 				"Press F16 to show Controls");
+	col_hook(&e->fra);
 	loop_hook_help(e);
 	ft_bzero(e->img.addr, sizeof(int) * X_WIN * Y_WIN);
 	return (0);

@@ -1,5 +1,6 @@
 #include "kernel.h"
 
+int		ch_col(__global t_fractal *c, float iter);
 int		ft_color(uchar4 a, uchar4 b, uchar4 c, float i);
 int		ft_colors(int clr1, int clr2, double val);
 
@@ -31,6 +32,26 @@ int		ft_color(uchar4 a, uchar4 b, uchar4 c, float i)
 	return (newc);
 }
 
+int		ch_col(__global t_fractal *c, float iter)
+{
+	int		r;
+	int		g;
+	int		b;
+
+	if (iter >= c->i_max)
+		return (0);
+	else
+	{
+		r = sin((float)(fmod((float)(c->r_freq * iter + c->r_ph), (float)(2 * M_PI))))
+			* c->clr2 + c->clr;
+		g = sin((float)(fmod((float)(c->g_freq * iter + c->g_ph), (float)(2 * M_PI))))
+			* c->clr2 + c->clr;
+		b = sin((float)(fmod((float)(c->b_freq * iter + c->b_ph), (float)(2 * M_PI))))
+			* c->clr2 + c->clr;
+		return (r << 16 | g << 8 | b);
+	}
+}
+
 int			ft_colors(int clr1, int clr2, double val)
 {
 	int		r;
@@ -49,6 +70,7 @@ int			ft_colors(int clr1, int clr2, double val)
 		- (double)((clr2) & 0xFF)) * val));
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
+
 __kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e)
 {
 	int i;
@@ -81,8 +103,8 @@ __kernel void mandelbrot_gpu(__global int *out, __global t_fractal *e)
 		{
 			deg = log(tmp / log(e->smth)) / log(e->smth);
 			//out[idx] = ft_color(b, d, a, (((float)i + (1 - deg)) / e->i_max));
-			out[idx] = ft_colors(0x000000, 0x88ff88, (((float)i + (1 - deg)) / e->i_max));
-			//out[idx] = i;
+			//out[idx] = ft_colors(0x000000, 0x88ff88, (((float)i + (1 - deg)) / e->i_max));
+			out[idx] = ch_col(e, deg);
 			return;
 		}
 	}
