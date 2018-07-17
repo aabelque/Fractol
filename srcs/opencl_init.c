@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/17 17:13:08 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 18:34:00 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void				create_prog(t_opencl *opcl)
 		exit(EXIT_FAILURE);
 	}
 	error = clBuildProgram(opcl->program, 1, &opcl->device_id,
-				"-I./include", NULL, NULL);
+				NULL, NULL, NULL);
 	error_gpu(opcl);
 	free((void *)opcl->kernel_src);
 }

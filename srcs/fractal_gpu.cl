@@ -1,4 +1,40 @@
-#include "kernel.h"
+typedef	struct		s_cmplx
+{
+	float			r;
+	float			i;
+}					t_cmplx;
+
+typedef	struct		s_fractal
+{
+	float			x1;
+	float			x2;
+	float			y1;
+	float			y2;
+	float			zoom;
+	float			julcr;
+	float			julci;
+	float			n;
+	float			size_tree;
+	float			size_tree2;
+	float			i_max2;
+	float			smth;
+	float			deg;
+	float			r_freq;
+	float			g_freq;
+	float			b_freq;
+	float			r_ph;
+	float			g_ph;
+	float			b_ph;
+	int				clr;
+	int				clr2;
+	int				col_style;
+	int				psych;
+	int				r;
+	int				g;
+	int				b;
+	int				sc;
+	int				i_max;
+}					t_fractal;
 
 int		ch_col(__global t_fractal *c, float iter);
 

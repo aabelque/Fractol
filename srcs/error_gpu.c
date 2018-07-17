@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 15:56:42 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/17 16:00:08 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 18:34:24 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			error_gpu(t_opencl *opcl)
 	size_t	errlog;
 
 	if (clBuildProgram(opcl->program, 1, &opcl->device_id,
-				"-I./include", NULL, NULL) != CL_SUCCESS)
+				NULL, NULL, NULL) != CL_SUCCESS)
 	{
 		coderr = clGetProgramBuildInfo(opcl->program, opcl->device_id,
 				CL_PROGRAM_BUILD_LOG, 0, NULL, &errlog);

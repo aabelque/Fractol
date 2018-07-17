@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/07/17 17:19:20 by aabelque         ###   ########.fr        #
+#    Updated: 2018/07/17 18:37:45 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,7 @@ SRC = srcs/main.c \
 	  
 OBJS = $(SRC:%.c=%.o)
 	INCDIR = include/
-	INCFILE = fractol.h \
-			  kernel.h
+	INCFILE = fractol.h
 	INC = $(addprefix $(INCDIR), $(INCFILE))
 
 LIBPATH = libs/
