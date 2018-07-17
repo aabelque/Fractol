@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/17 16:57:41 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 17:37:28 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,23 @@ static	int		loop_hook_help(t_env *e)
 {
 	if (e->keyf == 1)
 	{
-		mlx_string_put(e->mlx, e->win, X_WIN - 300, 1, 0xffffff,
-				"Change Fractal: Keybd 1 -> 7");
-		mlx_string_put(e->mlx, e->win, X_WIN - 300, 20, 0xffffff,
+		mlx_string_put(e->mlx, e->win, X_WIN - 330, 1, 0xffffff,
+				"Change Fractal cpu: Keybd 1 -> 7");
+		mlx_string_put(e->mlx, e->win, X_WIN - 330, 20, 0xffffff,
+				"Change Fractal gpu: Keybd 1 -> 5");
+		mlx_string_put(e->mlx, e->win, X_WIN - 330, 39, 0xffffff,
 				"Color: Num Keypad 1 -> 6");
-		mlx_string_put(e->mlx, e->win, X_WIN - 300, 39, 0xffffff,
+		mlx_string_put(e->mlx, e->win, X_WIN - 330, 58, 0xffffff,
 				"Color psych: W, A, S, D, C");
-		mlx_string_put(e->mlx, e->win, X_WIN - 300, 58, 0xffffff,
+		mlx_string_put(e->mlx, e->win, X_WIN - 330, 77, 0xffffff,
 				"Smooth color: Num Keypad 0");
-		mlx_string_put(e->mlx, e->win, X_WIN - 300, 77, 0xffffff,
+		mlx_string_put(e->mlx, e->win, X_WIN - 330, 96, 0xffffff,
 				"Iteration: I, U");
-		mlx_string_put(e->mlx, e->win, X_WIN - 300, 96, 0xffffff,
+		mlx_string_put(e->mlx, e->win, X_WIN - 330, 115, 0xffffff,
 				"Multibrot: Change Form P, O");
-		mlx_string_put(e->mlx, e->win, X_WIN - 300, 115, 0xffffff,
+		mlx_string_put(e->mlx, e->win, X_WIN - 330, 134, 0xffffff,
 				"Zoom: +, -, mouse scroll");
-		mlx_string_put(e->mlx, e->win, X_WIN - 300, 134, 0xffffff,
+		mlx_string_put(e->mlx, e->win, X_WIN - 330, 153, 0xffffff,
 				"Move: Arrow");
 	}
 	return (0);
