@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:18:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/15 13:03:59 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 17:05:08 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		m_help(t_env *e)
 	else
 	{
 		set_opencl_env(&e->opcl);
-		opencl_init(&e->opcl, e);
+		opencl_init(&e->opcl);
 	}
 }
 

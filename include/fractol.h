@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/17 16:53:15 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 17:09:31 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,9 +218,10 @@ void				color_random(t_fractal *c);
 void				psych_col_rand(t_fractal *c);
 int					ch_col(t_fractal *c, float iter);
 int					col_hook(t_env *e);
-void				opencl_init(t_opencl *opcl, t_env *e);
+void				opencl_init(t_opencl *opcl);
+void				opencl_init2(t_opencl *opcl);
 void				opencl_free(t_opencl *opcl);
-void				opencl_draw(t_opencl *opcl, t_env *e, float deg);
+void				opencl_draw(t_opencl *opcl, t_env *e);
 void				set_opencl_env(t_opencl *opcl);
 void				create_prog(t_opencl *opcl);
 char				*get_kernel_source(char *file);

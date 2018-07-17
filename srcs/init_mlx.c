@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/17 12:43:06 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 16:57:41 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static	int		loop_hook_help(t_env *e)
 int				loop_hook(t_env *e)
 {
 	key_press(e);
-	(e->device == 2) ? opencl_draw(&e->opcl, e, e->opcl.deg) : (void)e;
+	(e->device == 2) ? opencl_draw(&e->opcl, e) : (void)e;
 	if (e->device == 1)
 		(e->fractol != F_TREE) ? (send_thread(e))
 			: (send_tree(e, e->fra.i_max2));

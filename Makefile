@@ -6,7 +6,7 @@
 #    By: aabelque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 11:58:57 by aabelque          #+#    #+#              #
-#    Updated: 2018/07/17 16:00:56 by aabelque         ###   ########.fr        #
+#    Updated: 2018/07/17 17:19:20 by aabelque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,11 +49,14 @@ SRC = srcs/main.c \
 	  srcs/error_gpu.c \
 	  srcs/set_thread.c \
 	  srcs/opencl_init.c \
+	  srcs/opencl_init2.c \
+	  srcs/opencl_draw.c \
 	  srcs/opencl_free.c
 	  
 OBJS = $(SRC:%.c=%.o)
 	INCDIR = include/
-	INCFILE = fractol.h
+	INCFILE = fractol.h \
+			  kernel.h
 	INC = $(addprefix $(INCDIR), $(INCFILE))
 
 LIBPATH = libs/
