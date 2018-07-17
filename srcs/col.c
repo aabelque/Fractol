@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 11:31:51 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/15 15:57:42 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 10:28:45 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	setup_col(t_fractal *c)
 {
 	c->sc = 0;
 	c->col_style = 0;
-	c->clr = 127;
-	c->clr2 = 128;
+	c->clr = 128;
+	c->clr2 = 127;
 	c->r_freq = 0.33;
 	c->g_freq = 0.33;
 	c->b_freq = 0.33;
@@ -34,18 +34,18 @@ void	col_pal(t_fractal *c)
 	{
 		c->r_freq = 0.33;
 		c->g_freq = 0.33;
-		c->b_freq = 0.33;
+		c->b_freq = 31.33;
 	}
 	if (c->col_style == 1)
 	{
-		c->r_freq = 0.33;
+		c->r_freq = 31.33;
 		c->g_freq = 0.33;
 		c->b_freq = 0.00;
 	}
 	if (c->col_style == 2)
 	{
 		c->r_freq = 0.33;
-		c->g_freq = 0.00;
+		c->g_freq = 30.00;
 		c->b_freq = 0.33;
 	}
 	if (c->col_style == 3)

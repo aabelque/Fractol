@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 12:16:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/15 14:39:04 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 15:40:01 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ typedef	struct		s_fractal
 	int				clr2;
 	int				col_style;
 	int				psych;
-	int				sc;
 	int				r;
 	int				g;
 	int				b;
+	int				sc;
 	int				i_max;
 }					t_fractal;
 #endif

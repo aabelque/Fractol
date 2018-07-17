@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 11:48:25 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/15 16:00:56 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 16:53:34 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				key_hook3(int keycode, t_env *e)
 		else
 			e->fra.smth = 5000.0;
 	}
-	if (keycode == K_C7)
+	if (keycode == K_5)
 	{
 		e->fractol = F_TRI;
 		init_env(e);

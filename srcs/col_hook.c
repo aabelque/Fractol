@@ -6,22 +6,31 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 12:00:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/15 14:39:35 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 12:47:58 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		col_hook(t_fractal *c)
+int		col_hook(t_env *e)
 {
-	if (c->psych == 1)
+	if (e->fra.psych == 1 && e->device == 2)
 	{
-		c->r_ph = (c->r_ph > 2 * M_PI) ?
-		fmod(c->r_ph, 2 * M_PI) : c->r_ph + 0.05;
-		c->g_ph = (c->g_ph > 2 * M_PI) ?
-		fmod(c->g_ph, 2 * M_PI) : c->g_ph + 0.05;
-		c->b_ph = (c->b_ph > 2 * M_PI) ?
-		fmod(c->b_ph, 2 * M_PI) : c->b_ph + 0.05;
+		e->fra.r_ph = (e->fra.r_ph > 2 * M_PI) ?
+		fmod(e->fra.r_ph, 2 * M_PI) : e->fra.r_ph + 0.015;
+		e->fra.g_ph = (e->fra.g_ph > 2 * M_PI) ?
+		fmod(e->fra.g_ph, 2 * M_PI) : e->fra.g_ph + 0.015;
+		e->fra.b_ph = (e->fra.b_ph > 2 * M_PI) ?
+		fmod(e->fra.b_ph, 2 * M_PI) : e->fra.b_ph + 0.015;
+	}
+	if (e->fra.psych == 1 && e->device != 2)
+	{
+		e->fra.r_ph = (e->fra.r_ph > 2 * M_PI) ?
+		fmod(e->fra.r_ph, 2 * M_PI) : e->fra.r_ph + 0.07;
+		e->fra.g_ph = (e->fra.g_ph > 2 * M_PI) ?
+		fmod(e->fra.g_ph, 2 * M_PI) : e->fra.g_ph + 0.07;
+		e->fra.b_ph = (e->fra.b_ph > 2 * M_PI) ?
+		fmod(e->fra.b_ph, 2 * M_PI) : e->fra.b_ph + 0.07;
 	}
 	return (0);
 }

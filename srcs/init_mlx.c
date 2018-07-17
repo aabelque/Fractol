@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:09:11 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/15 14:13:15 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 12:43:06 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int				key_quit(t_env *e)
 {
+	if (e->device == 2)
+		opencl_free(&e->opcl);
 	mlx_destroy_window(e->mlx, e->win);
 	mlx_destroy_image(e->mlx, e->img.img);
 	clean(e);
@@ -65,7 +67,7 @@ int				loop_hook(t_env *e)
 		ft_error("fail to put image");
 	mlx_string_put(e->mlx, e->win, X_WIN - X_WIN, 1, 0xffffff,
 				"Press F16 to show Controls");
-	col_hook(&e->fra);
+	col_hook(e);
 	loop_hook_help(e);
 	ft_bzero(e->img.addr, sizeof(int) * X_WIN * Y_WIN);
 	return (0);

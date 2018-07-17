@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:47:19 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/11 19:20:46 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 16:51:52 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static	void	key_change_fractal(int keycode, t_env *e)
 		e->fractol = F_BURNIN;
 		init_env3(e);
 	}
-	if (keycode == K_5)
+	if (keycode == K_6)
 	{
 		e->fractol = F_TREE;
 		init_env5(e);
@@ -114,7 +114,7 @@ int				key_hook(int keycode, t_env *e)
 		e->fra.n += 0.2;
 	if (keycode == K_O)
 		e->fra.n -= 0.2;
-	if (keycode == K_6)
+	if (keycode == K_7)
 	{
 		e->fractol = F_SPONGE;
 		init_env4(e);

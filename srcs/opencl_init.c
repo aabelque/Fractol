@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 11:30:12 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/14 17:44:51 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 16:47:26 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void			set_opencl_env(t_opencl *opcl)
 	opcl->imgxy[0] = X_WIN;
 	opcl->imgxy[1] = Y_WIN;
 	opcl->deg = 0;
+	ft_bzero(opcl->kernel, sizeof(char) * 5);
 }
 
 void		create_kernel(cl_program program, cl_kernel *kernel, const char *func)
@@ -64,7 +65,7 @@ char		*get_kernel_source(char *file)
 
 void		create_prog(t_opencl *opcl)
 {
-	opcl->kernel_src = get_kernel_source("srcs/mandelbrot_gpu.cl"); 
+	opcl->kernel_src = get_kernel_source("./srcs/fractal_gpu.cl"); 
 	if (!(opcl->program = clCreateProgramWithSource(opcl->context, 1,
 					(const char **)&opcl->kernel_src, NULL, &opcl->err)))
 	{
@@ -74,21 +75,7 @@ void		create_prog(t_opencl *opcl)
 	cl_int	error;
 	error = clBuildProgram(opcl->program, 1, &opcl->device_id,
 				"-I./include", NULL, NULL);
-	if (clBuildProgram(opcl->program, 1, &opcl->device_id,
-				"-I./include", NULL, NULL) != CL_SUCCESS)
-	{
-		char *errbuf;
-		cl_int coderr;
-		size_t errlog;
-		coderr = clGetProgramBuildInfo(opcl->program, opcl->device_id,
-				CL_PROGRAM_BUILD_LOG, 0, NULL, &errlog);
-		errbuf = ft_memalloc(sizeof(errlog));
-		coderr = clGetProgramBuildInfo(opcl->program, opcl->device_id,
-				CL_PROGRAM_BUILD_LOG, errlog, errbuf, NULL);
-		ft_putendl("Error: Failed to build program");
-		ft_putendl(errbuf);
-		exit(EXIT_FAILURE);
-	}
+	error_gpu(opcl);
 	free((void *)opcl->kernel_src);
 }
 
@@ -126,9 +113,10 @@ void			opencl_init(t_opencl *opcl, t_env *e)
 			sizeof(int) * opcl->img_s, NULL, NULL);
 	create_prog(opcl);
 	create_kernel(opcl->program, &opcl->kernel[0], "mandelbrot_gpu");
-//	create_kernel(opcl->program, opcl->kernel[1], "julia_gpu");
-//	create_kernel(opcl->program, opcl->kernel[2], "multibrot_gpu");
-//	create_kernel(opcl->program, opcl->kernel[3], "burningship_gpu");
+	create_kernel(opcl->program, &opcl->kernel[1], "julia_gpu");
+	create_kernel(opcl->program, &opcl->kernel[2], "multibrot_gpu");
+	create_kernel(opcl->program, &opcl->kernel[3], "burningship_gpu");
+	create_kernel(opcl->program, &opcl->kernel[4], "tricorn_gpu");
 
 }
 
@@ -136,18 +124,22 @@ void			opencl_draw(t_opencl *opcl, t_env *e, float deg)
 {
 	size_t		i;
 
+	i = 0;
 	opcl->err = 0;
 	opcl->err = clEnqueueWriteBuffer(opcl->commands, opcl->input, CL_TRUE, 0,
 			sizeof(t_fractal), (void *)&e->fra, 0, NULL, NULL);
-	opcl->err |= clSetKernelArg(*opcl->kernel, 0, sizeof(cl_mem), &opcl->output);
-	opcl->err |= clSetKernelArg(*opcl->kernel, 1, sizeof(cl_mem), &opcl->input);
-	opcl->err = clEnqueueNDRangeKernel(opcl->commands, *opcl->kernel, 2, NULL,
-			opcl->imgxy, NULL, 0, NULL, NULL);
+	while (i < 5)
+	{
+		opcl->err |= clSetKernelArg(opcl->kernel[i], 0, sizeof(cl_mem), &opcl->output);
+		opcl->err |= clSetKernelArg(opcl->kernel[i], 1, sizeof(cl_mem), &opcl->input);
+		i++;
+	}
+	opcl->err = clEnqueueNDRangeKernel(opcl->commands, opcl->kernel[e->fractol],
+			2, NULL, opcl->imgxy, NULL, 0, NULL, NULL);
 //	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->deg2, CL_TRUE, 0,
 //			sizeof(float), &opcl->bufdeg, 0, NULL, NULL);
 	opcl->err = clEnqueueReadBuffer(opcl->commands, opcl->output, CL_TRUE, 0,
 			sizeof(int) * opcl->img_s, e->img.addr, 0, NULL, NULL);
-	i = 0;
 	(void)deg;
 //	deg = opcl->bufdeg;
 	/*while (i < opcl->img_s)

@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/15 14:35:49 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/17 16:53:15 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ enum				e_key
 	K_4,
 	K_5 = 23,
 	K_6 = 22,
+	K_7 = 26,
 	K_P = 35,
 	K_O = 31,
 	K_I = 34,
@@ -62,7 +63,6 @@ enum				e_key
 	K_C4,
 	K_C5,
 	K_C6,
-	K_C7 = 26,
 	K_X = 7,
 	K_CC,
 	K_W = 13,
@@ -82,9 +82,9 @@ enum				e_fracts
 	F_JULIA,
 	F_MULTI,
 	F_BURNIN,
+	F_TRI,
 	F_TREE,
 	F_SPONGE,
-	F_TRI,
 	F_MAX
 };
 
@@ -140,7 +140,7 @@ typedef	struct		s_opencl
 	cl_context			context;
 	cl_command_queue	commands;
 	cl_program			program;
-	cl_kernel			kernel[4];
+	cl_kernel			kernel[5];
 	t_fractal			fra;
 }					t_opencl;
 
@@ -217,8 +217,9 @@ void				col_pal(t_fractal *c);
 void				color_random(t_fractal *c);
 void				psych_col_rand(t_fractal *c);
 int					ch_col(t_fractal *c, float iter);
-int					col_hook(t_fractal *c);
+int					col_hook(t_env *e);
 void				opencl_init(t_opencl *opcl, t_env *e);
+void				opencl_free(t_opencl *opcl);
 void				opencl_draw(t_opencl *opcl, t_env *e, float deg);
 void				set_opencl_env(t_opencl *opcl);
 void				create_prog(t_opencl *opcl);
@@ -276,9 +277,9 @@ void				*buddhabrot(void *arg);
 void				*multibrot(void *arg);
 void				*julia(void *arg);
 void				ft_error(char *str);
+int					error_gpu(t_opencl *opcl);
 void				ft_malloc_error(t_env *e);
 void				ft_usage(void);
-//void				init_color_gpu(t_fractal c);
 int					init_mlx(t_env *e);
 int					loop_hook(t_env *e);
 int					parsing_arg(char *str, char *s, t_env *e);
