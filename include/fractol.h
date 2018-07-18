@@ -6,7 +6,7 @@
 /*   By: aabelque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:13:49 by aabelque          #+#    #+#             */
-/*   Updated: 2018/07/17 17:09:31 by aabelque         ###   ########.fr       */
+/*   Updated: 2018/07/18 13:06:09 by aabelque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,19 +122,19 @@ typedef	struct		s_fractal
 
 typedef	struct		s_opencl
 {
-	cl_device_type		dev_type;
-	float				deg;
-	cl_int				err;
-	cl_uint				num_dev;
 	size_t				local;
 	size_t				img_s;
 	size_t				imgxy[2];
 	int					*bufhst;
 	float				bufdeg;
+	float				deg;
+	char				*kernel_src;
+	cl_device_type		dev_type;
+	cl_int				err;
+	cl_uint				num_dev;
 	cl_mem				input;
 	cl_mem				output;
 	cl_mem				col;
-	char				*kernel_src;
 	cl_platform_id		platform_id;
 	cl_device_id		device_id;
 	cl_context			context;
@@ -195,6 +195,7 @@ typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
+	void			*(*func[F_MAX])(void *arg);
 	int				fractol;
 	int				mouse;
 	int				keybd;
@@ -204,7 +205,6 @@ typedef struct		s_env
 	int				device;
 	float			x_win;
 	float			y_win;
-	void			*(*func[F_MAX])(void *arg);
 	pthread_t		thread[NB_THR];
 	t_img			img;
 	t_fractal		fra;
@@ -212,19 +212,17 @@ typedef struct		s_env
 	t_opencl		opcl;
 }					t_env;
 
+char				*get_kernel_source(char *file);
 void				setup_col(t_fractal *c);
 void				col_pal(t_fractal *c);
 void				color_random(t_fractal *c);
 void				psych_col_rand(t_fractal *c);
-int					ch_col(t_fractal *c, float iter);
-int					col_hook(t_env *e);
 void				opencl_init(t_opencl *opcl);
 void				opencl_init2(t_opencl *opcl);
 void				opencl_free(t_opencl *opcl);
 void				opencl_draw(t_opencl *opcl, t_env *e);
 void				set_opencl_env(t_opencl *opcl);
 void				create_prog(t_opencl *opcl);
-char				*get_kernel_source(char *file);
 void				create_kernel(cl_program program, cl_kernel *kernel,
 		const char *func);
 void				send_tree(t_env *e, int iter);
@@ -238,7 +236,6 @@ void				change_color3(t_env *e);
 void				change_color4(t_env *e);
 void				change_color5(t_env *e);
 void				change_color6(t_env *e);
-int					key_quit(t_env *e);
 void				init_funct(t_env *e);
 void				init_color(t_env *e);
 void				send_thread(t_env *e);
@@ -251,21 +248,7 @@ void				zoom_dok(t_env *e);
 void				move_do(t_env *e);
 void				move_r(t_env *e);
 void				move_l(t_env *e);
-int					mouse_hook(int button, int x, int y, t_env *e);
-int					mouse_motion_hook(int x, int y, t_env *e);
-int					key_hook(int keycode, t_env *e);
-int					key_hook3(int keycode, t_env *e);
-int					key_release_hook(int keycode, t_env *e);
-int					key_press(t_env *e);
 void				set_pxl(t_img *e, int x, int y, t_color color);
-t_color				color_r(void);
-t_color				color_g(void);
-t_color				color_b(void);
-t_color				color_bl(void);
-t_color				color_bc(void);
-t_color				color_y(void);
-t_color				interpol_color(t_color a, t_color b, float i);
-t_color				interpol_color2(t_color a, t_color b, t_color c, float i);
 void				init_env(t_env *e);
 void				init_env2(t_env *e, float x, float y);
 void				init_env3(t_env *e);
@@ -278,12 +261,29 @@ void				*buddhabrot(void *arg);
 void				*multibrot(void *arg);
 void				*julia(void *arg);
 void				ft_error(char *str);
-int					error_gpu(t_opencl *opcl);
 void				ft_malloc_error(t_env *e);
 void				ft_usage(void);
+int					ch_col(t_fractal *c, float iter);
+int					col_hook(t_env *e);
+int					key_quit(t_env *e);
+int					mouse_hook(int button, int x, int y, t_env *e);
+int					mouse_motion_hook(int x, int y, t_env *e);
+int					key_hook(int keycode, t_env *e);
+int					key_hook3(int keycode, t_env *e);
+int					key_release_hook(int keycode, t_env *e);
+int					key_press(t_env *e);
+int					error_gpu(t_opencl *opcl);
 int					init_mlx(t_env *e);
 int					loop_hook(t_env *e);
 int					parsing_arg(char *str, char *s, t_env *e);
 int					parsing_arg2(char *str, char *s, t_env *e);
 int					main(int ac, char **av);
+t_color				color_r(void);
+t_color				color_g(void);
+t_color				color_b(void);
+t_color				color_bl(void);
+t_color				color_bc(void);
+t_color				color_y(void);
+t_color				interpol_color(t_color a, t_color b, float i);
+t_color				interpol_color2(t_color a, t_color b, t_color c, float i);
 #endif
